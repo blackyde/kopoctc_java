@@ -37,8 +37,8 @@ public class Lec08 {
 //			if(field.length > 2 &&
 //					field[2].replace("^", "").trim().substring(0, 1).equals("A")) {
 			if(field.length > 2 &&
-					field[1].replace("^", "").trim().substring(0,4).equals("2015") &&
-					field[2].replace("^", "").trim().equals("A005930")) {
+					field[1].replace("^", "").trim().substring(0,4).equals("2015") && //2015년
+					field[2].replace("^", "").trim().equals("A005930")) { //삼성
 				s.append(field[0].replace("^", "").trim());
 				for (int j = 1; j < field.length; j++) {
 					s.append("," + field[j].replace("^", "").trim());
