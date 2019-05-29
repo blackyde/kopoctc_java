@@ -12,7 +12,7 @@ import java.io.IOException;
  * @Project : 0524
  * @Date : 2019. 5. 26.
  * @Author : JBP
- * @Descript : 감 잡은 내용으로 파일정제
+ * @Descript : 감 잡은 내용으로 파일정제 git 에 올리기
  */
 public class Lec08 {
 
