@@ -49,6 +49,8 @@ public class Developer {
 		List<String> filter = new ArrayList<String>();
 		filter.add("id");
 		filter.add("1");
+		filter.add("3");
+		//String sql = "SELECT * FROM AccountItem WHERE " + filter.get(0) + " BETWEEN ? AND ?";
 		List<AccountItem> alist = dao.selectContainsTitle(filter);
 		
 		for(AccountItem aItem : alist) {
