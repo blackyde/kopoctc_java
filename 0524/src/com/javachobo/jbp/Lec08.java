@@ -24,7 +24,7 @@ public class Lec08 {
 		//File f1 = new File("c:\\Study\\File\\StockDailyPrice.csv");
 		//File f1 = new File("c:\\Study\\File\\A005930.csv");
 		//File f1 = new File("c:\\Study\\File\\20150112.csv");
-		File f1 = new File("c:\\Study\\File\\20150112A005930.csv");
+		File f1 = new File("c:\\Study\\File\\2015A005930.csv");
 		BufferedWriter bw1 = new BufferedWriter(new FileWriter(f1));
 		
 		String readtxt;
