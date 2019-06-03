@@ -77,7 +77,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	}
 
 	@Override
-	public List<AccountItem> selectContainsTitle() {
+	public List<AccountItem> selectContainsTitle(String filter) {
 		PreparedStatement pstmt = null;
 		Connection conn = Conn.getConnection();
 		ResultSet rset = null;
@@ -85,7 +85,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 		AccountItem aItem = new AccountItem();
 		
 		try {
-			selectContainsTitle_overriding(conn, pstmt, rset, list, aItem);
+			selectContainsTitle_overriding(conn, pstmt, rset, list, aItem, filter);
 			conn.close();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -95,14 +95,12 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	}
 	
 	@Override
-	public List<AccountItem> selectContainsTitle_overriding(Connection conn, PreparedStatement pstmt, ResultSet rset, List<AccountItem> list, AccountItem aItem) throws SQLException {
+	public List<AccountItem> selectContainsTitle_overriding(Connection conn, PreparedStatement pstmt, ResultSet rset, List<AccountItem> list, AccountItem aItem, String filter) throws SQLException {
 		
-		String filter = "title";
-				
-		String sql = "SELECT * FROM AccountItem WHERE " + filter + " LIKE ?";
+		String sql = "SELECT * FROM AccountItem WHERE ?";
 		
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, aItem.getTitle());
+		pstmt.setString(1, filter);
 		rset = pstmt.executeQuery();
 		while(rset.next()) {
 			aItem = new AccountItem();
