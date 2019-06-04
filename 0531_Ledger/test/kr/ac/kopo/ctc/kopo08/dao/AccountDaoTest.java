@@ -20,19 +20,22 @@ public class AccountDaoTest {
 		dao.create(account);
 	}
 	
-	
+	@Test
 	public void testCreateItem() {
+		
 		String title = "PS4";
 		int id = 1;
-		String category = "취미";
+		String payment = "카드";
+		String category = Cat.CULTURE.name();
 		int price = 378000;
-		String whether = "지출";
+		int whether = 0; //0 : 지출, 1 : 수입
 		AccountItemDao dao = new AccountItemDaoImpl();
 		AccountItem aItem = new AccountItem();
 		Account account = new Account();
 		account.setId(id);
 		aItem.setAccount(account);
 		aItem.setTitle(title);
+		aItem.setPayment(payment);
 		aItem.setCategory(category);
 		aItem.setPrice(price);
 		aItem.setWhether(whether);
@@ -60,7 +63,7 @@ public class AccountDaoTest {
 		System.out.printf("%d %s %s %d %s", aItem.getId(), aItem.getTitle(), aItem.getCreated(), aItem.getAccount().getId(), aItem.getCategory());
 	}
 	
-	@Test
+	
 	public void testSelectAllItem() {
 		AccountItemDao dao = new AccountItemDaoImpl();
 		List<AccountItem> list = dao.selectAll();
@@ -81,7 +84,9 @@ public class AccountDaoTest {
 		
 	}
 	
-	public void testUpdate(int id, String title) {
+	public void testUpdate() {
+		int id = 2;
+		String title = "회사용";
 		AccountDao dao = new AccountDaoImpl();
 		Account account = new Account();
 		account.setId(id);
@@ -138,3 +143,5 @@ public class AccountDaoTest {
 //	}
 
 }
+
+

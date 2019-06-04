@@ -14,13 +14,14 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	public AccountItem create_overriding(Connection conn, PreparedStatement pstmt, AccountItem aItem) throws SQLException {
 		
 		String sql = "INSERT INTO AccountItem"
-				+ " (title, account_id, category, price, whether) VALUES (?, ?, ?, ?, ?)";
+				+ " (title, account_id, payment, category, price, whether) VALUES (?, ?, ?, ?, ?, ?)";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, aItem.getTitle());
 		pstmt.setInt(2, aItem.getAccount().getId());
-		pstmt.setString(3, aItem.getCategory());
-		pstmt.setInt(4, aItem.getPrice());
-		pstmt.setString(5, aItem.getWhether());
+		pstmt.setString(3, aItem.getPayment());
+		pstmt.setString(4, aItem.getCategory());
+		pstmt.setInt(5, aItem.getPrice());
+		pstmt.setInt(6, aItem.getWhether());
 		pstmt.executeUpdate();
 		pstmt.close();
 		
@@ -42,9 +43,10 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			aItem.setCreated(rset.getDate(3));
 			account.setId(rset.getInt(4));
 			aItem.setAccount(account);
-			aItem.setCategory(rset.getString(5));
-			aItem.setPrice(rset.getInt(6));
-			aItem.setWhether(rset.getString(7));
+			aItem.setPayment(rset.getString(5));
+			aItem.setCategory(rset.getString(6));
+			aItem.setPrice(rset.getInt(7));
+			aItem.setWhether(rset.getInt(8));
 		}
 		rset.close();
 		pstmt.close();
@@ -66,9 +68,10 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			aItem.setCreated(rset.getDate(3));
 			account.setId(rset.getInt(4));
 			aItem.setAccount(account);
-			aItem.setCategory(rset.getString(5));
-			aItem.setPrice(rset.getInt(6));
-			aItem.setWhether(rset.getString(7));
+			aItem.setPayment(rset.getString(5));
+			aItem.setCategory(rset.getString(6));
+			aItem.setPrice(rset.getInt(7));
+			aItem.setWhether(rset.getInt(8));
 			list.add(aItem);
 		}
 		rset.close();
@@ -110,9 +113,10 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			aItem.setCreated(rset.getDate(3));
 			account.setId(rset.getInt(4));
 			aItem.setAccount(account);
-			aItem.setCategory(rset.getString(5));
-			aItem.setPrice(rset.getInt(6));
-			aItem.setWhether(rset.getString(7));
+			aItem.setPayment(rset.getString(5));
+			aItem.setCategory(rset.getString(6));
+			aItem.setPrice(rset.getInt(7));
+			aItem.setWhether(rset.getInt(8));
 			list.add(aItem);
 		}
 		rset.close();
@@ -123,15 +127,16 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	@Override
 	public AccountItem update_overriding(Connection conn, PreparedStatement pstmt, AccountItem aItem) throws SQLException {
 		
-		String sql = "UPDATE AccountItem SET title = ?, account_id = ?, category = ?, price = ?, whether = ? WHERE id = ?";
+		String sql = "UPDATE AccountItem SET title = ?, account_id = ?, payment = ?, category = ?, price = ?, whether = ? WHERE id = ?";
 		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, aItem.getTitle());
 		pstmt.setInt(2, aItem.getAccount().getId());
-		pstmt.setString(3, aItem.getCategory());
-		pstmt.setInt(4, aItem.getPrice());
-		pstmt.setString(5, aItem.getWhether());
-		pstmt.setInt(6, aItem.getId());
+		pstmt.setString(3, aItem.getPayment());
+		pstmt.setString(4, aItem.getCategory());
+		pstmt.setInt(5, aItem.getPrice());
+		pstmt.setInt(6, aItem.getWhether());
+		pstmt.setInt(7, aItem.getId());
 		pstmt.executeUpdate();
 		pstmt.close();
 		return null;
