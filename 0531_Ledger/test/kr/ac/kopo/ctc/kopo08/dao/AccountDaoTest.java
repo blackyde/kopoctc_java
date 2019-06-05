@@ -11,25 +11,26 @@ import kr.ac.kopo.ctc.kopo08.domain.AccountItem;
 
 public class AccountDaoTest {
 	
+	public static final AccountDao AD = new AccountDaoImpl();
+	public static final AccountItemDao AID = new AccountItemDaoImpl();
+	
 	public void testCreate() {
 		String title = "회사용";
 		
-		AccountDao dao = new AccountDaoImpl();
 		Account account = new Account();
 		account.setTitle(title);
-		dao.create(account);
+		AD.create(account);
 	}
 	
-	@Test
+	
 	public void testCreateItem() {
 		
 		String title = "PS4";
 		int id = 1;
 		String payment = "카드";
-		String category = Cat.CULTURE.name();
+		String category = "건강/문화";
 		int price = 378000;
 		int whether = 0; //0 : 지출, 1 : 수입
-		AccountItemDao dao = new AccountItemDaoImpl();
 		AccountItem aItem = new AccountItem();
 		Account account = new Account();
 		account.setId(id);
@@ -39,43 +40,44 @@ public class AccountDaoTest {
 		aItem.setCategory(category);
 		aItem.setPrice(price);
 		aItem.setWhether(whether);
-		dao.create(aItem);
+		AID.create(aItem);
 	}
 	
 	public void testSelectOne() {
 		int id = 1;
-		AccountDao dao = new AccountDaoImpl();
-		Account account = new Account();
-		account.setId(id);
-		dao.selectOne(account);
+		Account account = AD.selectOne(id);
 		
 		System.out.printf("%d %s %s", account.getId(), account.getTitle(), account.getCreated());
 	}
 	
 	
+	@Test
 	public void testSelectOneItem() {
-		int id = 6;
-		AccountItemDao dao = new AccountItemDaoImpl();
-		AccountItem aItem = new AccountItem();
-		aItem.setId(id);
-		dao.selectOne(aItem);
-		
-		System.out.printf("%d %s %s %d %s", aItem.getId(), aItem.getTitle(), aItem.getCreated(), aItem.getAccount().getId(), aItem.getCategory());
+		int id = 2;
+		AccountItem aItem = AID.selectOne(id);
+		System.out.printf("번호\t내용\t일자\t구분\t방법\t분야\t금액\t지출여부\t번호\t내용\t일자\n");
+		System.out.printf("[%d]\t[%s]\t[%s]\t[%d]\t[%s]\t[%s]\t[%d]\t[%d]\t[%d]\t[%s]\t[%s]\n",
+				aItem.getId(), aItem.getTitle(), aItem.getCreated(),
+				aItem.getAccount().getId(), aItem.getPayment(), aItem.getCategory(),
+				aItem.getPrice(), aItem.getWhether(), aItem.getAccount().getId(),
+				aItem.getAccount().getTitle(), aItem.getAccount().getCreated());
 	}
 	
 	
 	public void testSelectAllItem() {
-		AccountItemDao dao = new AccountItemDaoImpl();
-		List<AccountItem> list = dao.selectAll();
+		List<AccountItem> list = AID.selectAll();
+		System.out.printf("번호\t내용\t일자\t구분\t방법\t분야\t금액\t지출여부\t번호\t내용\t일자\n");
 		for (AccountItem aItem : list) {
-			System.out.printf("%d %s %s\n", aItem.getId(), aItem.getTitle(), aItem.getCreated());
+			System.out.printf("[%d] [%s] [%s] [%d] [%s] [%s] [%d] [%d] [%d] [%s] [%s]\n",
+					aItem.getId(), aItem.getTitle(), aItem.getCreated(),
+					aItem.getAccount().getId(), aItem.getPayment(), aItem.getCategory(),
+					aItem.getPrice(), aItem.getWhether(), aItem.getAccount().getId(),
+					aItem.getAccount().getTitle(), aItem.getAccount().getCreated());
 		}
 	}
 	
 	public void testSelectAll() {
-		AccountDao dao = new AccountDaoImpl();
-		dao.selectAll();
-		List<Account> list = dao.selectAll();
+		List<Account> list = AD.selectAll();
 		
 		for (Account account : list) {
 			System.out.printf("%d %s %s\n", account.getId(), account.getTitle(), account.getCreated());
@@ -87,48 +89,40 @@ public class AccountDaoTest {
 	public void testUpdate() {
 		int id = 2;
 		String title = "회사용";
-		AccountDao dao = new AccountDaoImpl();
 		Account account = new Account();
 		account.setId(id);
 		account.setTitle(title);
-		dao.update(account);
+		AD.update(account);
 		
 		testSelectAll();
 	}
 	
 
 	public void testUpdateItem() {
-		AccountItemDao dao = new AccountItemDaoImpl();
-		AccountItem aItem = new AccountItem();
-		
 		int id = 1;
-		aItem.setId(id);
-		dao.selectOne(aItem);
+		AccountItem aItem = AID.selectOne(id);
 		
 		aItem.setPrice(498000);
 		
-		dao.update(aItem);
+		AID.update(aItem);
 		
 		testSelectAllItem();
 	}
 	
 	public void testDelete() {
-		AccountItemDao dao = new AccountItemDaoImpl();
 		AccountItem aItem = new AccountItem();
 		
 		int id = 1;
 		aItem.setId(id);
-		dao.deleteOne(aItem);
+		AID.deleteOne(aItem);
 		
 		testSelectAllItem();
 	}
 	
 	
 	public void testCreated() {
-		AccountDao dao = new AccountDaoImpl();
 		Account account = new Account();
-		account.setId(3);		
-		dao.selectOne(account);
+		AD.selectOne(3);
 		assertEquals(account.getTitle(), "회사용");
 	}
 
@@ -145,3 +139,31 @@ public class AccountDaoTest {
 }
 
 
+
+
+enum Cat {
+	 
+    FOOD("식비"),
+    HOME("주거/통신"),
+    LIVING("생활용품"),
+    CLOTH("의복/미용"),
+    CULTURE("건강/문화"),
+    EDUCATION("교육/육아"),
+    TRAFFIC("교통/차량"),
+    DUES("경조사/회비"),
+    TAX("세금/이자"),
+    ETC("용돈/기타"),
+    CREDIT("카드대금"),
+    SAVE("저축/보험"),
+    WIRE("이체/대체");
+     
+    final private String name;
+     
+    public String getName() {
+        return name;
+    }
+ 
+    private Cat(String name){
+        this.name = name;
+    }
+}
