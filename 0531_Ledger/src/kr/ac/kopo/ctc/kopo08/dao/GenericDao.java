@@ -23,4 +23,6 @@ public interface GenericDao<T> {
 	T deleteOne_overriding(T t) throws SQLException;
 	T deleteAll();
 	T deleteAll_overriding() throws SQLException;
+	
+	void closeAll();
 }

@@ -21,7 +21,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeAll();
 		return ret;
 		
 	}
@@ -33,7 +32,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeAll();
 		return ret;
 	}
 	
@@ -44,7 +42,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		closeAll();
 		return list;
 	}
 
@@ -55,7 +52,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeAll();
 		return ret;
 	}
 	
@@ -66,7 +62,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeAll();
 		return ret;
 	}
 	
@@ -77,7 +72,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeAll();
 		return ret;
 	}
 	

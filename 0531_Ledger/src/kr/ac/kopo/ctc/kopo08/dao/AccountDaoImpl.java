@@ -29,7 +29,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 		while(rset.next()) {
 			account.setId(rset.getInt(1));
 			account.setTitle(rset.getString(2));
-			account.setCreated(rset.getDate(3));
+			account.setCreated(rset.getTimestamp(3));
 		}
 		return account;
 	}
@@ -45,7 +45,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 			Account account = new Account();
 			account.setId(rset.getInt(1));
 			account.setTitle(rset.getString(2));
-			account.setCreated(rset.getDate(3));
+			account.setCreated(rset.getTimestamp(3));
 			list.add(account);
 		}
 		return list;

@@ -38,7 +38,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 		while(rset.next()) {
 			aItem.setId(rset.getInt(1)); //AccountItem.id
 			aItem.setTitle(rset.getString(2)); //AccountItem.title
-			aItem.setCreated(rset.getDate(3)); //AccountItem.created
+			aItem.setCreated(rset.getTimestamp(3)); //AccountItem.created
 			
 			sql = "SELECT * FROM Account WHERE id = ?";
 			pstmt = CONN.prepareStatement(sql);
@@ -47,7 +47,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			while(rset2.next()) {
 				account.setId(rset2.getInt(1)); //Account.id
 				account.setTitle(rset2.getString(2)); //Account.title
-				account.setCreated(rset2.getDate(3)); //Account.created
+				account.setCreated(rset2.getTimestamp(3)); //Account.created
 				aItem.setAccount(account);
 			}
 			aItem.setPayment(rset.getString(5)); //AccountItem.payment
@@ -62,7 +62,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	public List<AccountItem> selectAll_overriding(List<AccountItem> list) throws SQLException {
 		
 		list = new ArrayList<AccountItem>();
-		String sql = "SELECT * FROM AccountItem";
+		String sql = "SELECT * FROM AccountItem ORDER BY created DESC";
 		pstmt = CONN.prepareStatement(sql);
 		rset = pstmt.executeQuery();
 		while(rset.next()) {
@@ -70,7 +70,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			Account account = new Account();
 			aItem.setId(rset.getInt(1));
 			aItem.setTitle(rset.getString(2));
-			aItem.setCreated(rset.getDate(3));
+			aItem.setCreated(rset.getTimestamp(3));
 			
 			
 			sql = "SELECT * FROM Account WHERE id = ?";
@@ -80,7 +80,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 			while(rset2.next()) {
 				account.setId(rset2.getInt(1));
 				account.setTitle(rset2.getString(2));
-				account.setCreated(rset2.getDate(3));
+				account.setCreated(rset2.getTimestamp(3));
 				aItem.setAccount(account);
 			}
 			account.setId(rset.getInt(4));
@@ -103,7 +103,7 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 		AccountItem aItem = new AccountItem();
 		
 		try {
-			selectContainsTitle_overriding(list, aItem, filter);
+			list = selectContainsTitle_overriding(list, aItem, filter);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -114,17 +114,17 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	@Override
 	public List<AccountItem> selectContainsTitle_overriding(List<AccountItem> list, AccountItem aItem, List<String> filter) throws SQLException {
 		
-		String sql = "SELECT * FROM AccountItem WHERE " + filter.get(0) + " = ?";
+		String sql = "SELECT * FROM AccountItem WHERE " + filter.get(0) + " like ?";
 		
 		pstmt = CONN.prepareStatement(sql);
-		pstmt.setString(1, filter.get(1));
+		pstmt.setString(1, "%" + filter.get(1) + "%");
 		rset = pstmt.executeQuery();
 		while(rset.next()) {
 			aItem = new AccountItem();
 			Account account = new Account();
 			aItem.setId(rset.getInt(1));
 			aItem.setTitle(rset.getString(2));
-			aItem.setCreated(rset.getDate(3));
+			aItem.setCreated(rset.getTimestamp(3));
 			account.setId(rset.getInt(4));
 			aItem.setAccount(account);
 			aItem.setPayment(rset.getString(5));
@@ -139,16 +139,17 @@ public class AccountItemDaoImpl extends GenericDaoImpl<AccountItem> implements A
 	@Override
 	public AccountItem update_overriding(AccountItem aItem) throws SQLException {
 		
-		String sql = "UPDATE AccountItem SET title = ?, account_id = ?, payment = ?, category = ?, price = ?, whether = ? WHERE id = ?";
+		String sql = "UPDATE AccountItem SET title = ?, created = ?, account_id = ?, payment = ?, category = ?, price = ?, whether = ? WHERE id = ?";
 		
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.setString(1, aItem.getTitle());
-		pstmt.setInt(2, aItem.getAccount().getId());
-		pstmt.setString(3, aItem.getPayment());
-		pstmt.setString(4, aItem.getCategory());
-		pstmt.setInt(5, aItem.getPrice());
-		pstmt.setInt(6, aItem.getWhether());
-		pstmt.setInt(7, aItem.getId());
+		pstmt.setTimestamp(2, aItem.getCreated());
+		pstmt.setInt(3, aItem.getAccount().getId());
+		pstmt.setString(4, aItem.getPayment());
+		pstmt.setString(5, aItem.getCategory());
+		pstmt.setInt(6, aItem.getPrice());
+		pstmt.setInt(7, aItem.getWhether());
+		pstmt.setInt(8, aItem.getId());
 		pstmt.executeUpdate();
 		return null;
 	}

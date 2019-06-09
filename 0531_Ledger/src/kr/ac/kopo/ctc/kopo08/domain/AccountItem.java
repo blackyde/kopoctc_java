@@ -1,12 +1,11 @@
 package kr.ac.kopo.ctc.kopo08.domain;
 
-import java.util.Date;
-
+import java.sql.Timestamp;
 
 public class AccountItem {
 	private int id;
 	private String title;
-	private Date created;
+	private Timestamp created;
 	private String payment;
 	private String category;
 	private int price;
@@ -25,11 +24,11 @@ public class AccountItem {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp date) {
+		this.created = date;
 	}
 	public int getPrice() {
 		return price;

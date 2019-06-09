@@ -1,11 +1,11 @@
 package kr.ac.kopo.ctc.kopo08.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Account {
 	private int id;
 	private String title;
-	private Date created;
+	private Timestamp created;
 	
 	public int getId() {
 		return id;
@@ -19,10 +19,10 @@ public class Account {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
-	public void setCreated(Date created) {
+	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
 }

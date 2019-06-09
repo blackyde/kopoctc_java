@@ -3,6 +3,7 @@ package kr.ac.kopo.ctc.kopo08.dao;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+//import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -25,11 +26,11 @@ public class AccountDaoTest {
 	
 	public void testCreateItem() {
 		
-		String title = "PS4";
+		String title = "교육수당";
 		int id = 1;
-		String payment = "카드";
-		String category = "건강/문화";
-		int price = 378000;
+		String payment = "계좌";
+		String category = "급여";
+		int price = 319300;
 		int whether = 0; //0 : 지출, 1 : 수입
 		AccountItem aItem = new AccountItem();
 		Account account = new Account();
@@ -51,7 +52,7 @@ public class AccountDaoTest {
 	}
 	
 	
-	@Test
+
 	public void testSelectOneItem() {
 		int id = 2;
 		AccountItem aItem = AID.selectOne(id);
@@ -97,16 +98,15 @@ public class AccountDaoTest {
 		testSelectAll();
 	}
 	
-
+	@Test
 	public void testUpdateItem() {
-		int id = 1;
+		int id = 6;
 		AccountItem aItem = AID.selectOne(id);
-		
-		aItem.setPrice(498000);
-		
+//		Timestamp date = Timestamp.valueOf("2019-06-05 12:30:00");
+		aItem.setWhether(1);
 		AID.update(aItem);
 		
-		testSelectAllItem();
+//		testSelectAllItem();
 	}
 	
 	public void testDelete() {
@@ -138,32 +138,3 @@ public class AccountDaoTest {
 
 }
 
-
-
-
-enum Cat {
-	 
-    FOOD("식비"),
-    HOME("주거/통신"),
-    LIVING("생활용품"),
-    CLOTH("의복/미용"),
-    CULTURE("건강/문화"),
-    EDUCATION("교육/육아"),
-    TRAFFIC("교통/차량"),
-    DUES("경조사/회비"),
-    TAX("세금/이자"),
-    ETC("용돈/기타"),
-    CREDIT("카드대금"),
-    SAVE("저축/보험"),
-    WIRE("이체/대체");
-     
-    final private String name;
-     
-    public String getName() {
-        return name;
-    }
- 
-    private Cat(String name){
-        this.name = name;
-    }
-}
