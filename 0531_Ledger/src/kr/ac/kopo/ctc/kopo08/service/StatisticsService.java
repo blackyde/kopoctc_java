@@ -4,7 +4,7 @@ import kr.ac.kopo.ctc.kopo08.domain.AccountItem;
 
 public interface StatisticsService {
 	//지출 분야별 비율
-	AccountItem expendService();
+	AccountItem expendService(int account_id);
 	
 	//저번 달 수입 중 저축 비율
 	AccountItem saveService();

@@ -5,7 +5,7 @@ public class ServiceTest {
 	public static void main(String[] args) {
 		
 		StatisticsService service = new StatisticsServiceImpl();
-		service.expendService();
+		service.expendService(1);
 
 	}
 

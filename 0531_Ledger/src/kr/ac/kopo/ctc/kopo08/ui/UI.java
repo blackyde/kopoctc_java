@@ -1,6 +1,8 @@
 package kr.ac.kopo.ctc.kopo08.ui;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +14,14 @@ import kr.ac.kopo.ctc.kopo08.dao.AccountItemDao;
 import kr.ac.kopo.ctc.kopo08.dao.AccountItemDaoImpl;
 import kr.ac.kopo.ctc.kopo08.domain.Account;
 import kr.ac.kopo.ctc.kopo08.domain.AccountItem;
+import kr.ac.kopo.ctc.kopo08.service.StatisticsService;
+import kr.ac.kopo.ctc.kopo08.service.StatisticsServiceImpl;
 
 public class UI {
 	
 	private static final AccountDao AD = new AccountDaoImpl();
 	private static final AccountItemDao AID = new AccountItemDaoImpl();
+	private static final StatisticsService SS = new StatisticsServiceImpl();
 	private static SimpleDateFormat simpleDate = new SimpleDateFormat("YY-MM-dd HH:mm");
 	private static DecimalFormat decimal = new DecimalFormat("###,###,###,###,###");
 	
@@ -76,7 +81,13 @@ public class UI {
 		
 		String input = "";
 		int number = 0;
-		List<Account> list = AD.selectAll();
+		List<Account> list = null;
+		try {
+			list = AD.selectAll();
+		} catch(Exception e) {
+			System.out.println("DB가 연결되지 않았습니다.");
+			System.exit(0);
+		}
 		
 		while(true) {
 			System.out.print("\n사용할 가계부를 선택해 주세요.\n");
@@ -160,8 +171,10 @@ public class UI {
 			} else if(input.equals("4")) {
 				selectMain(account_id);
 			} else if(input.equals("5")) {
-				System.out.println("개발중");
-				continue;
+				service(account_id);
+				System.out.println("\n엔터를 누르면 이전 화면으로 돌아갑니다.");
+				sc.nextLine();
+				service(account_id);
 			} else {
 				System.out.println("다시 입력해주세요.");
 				continue;
@@ -358,6 +371,25 @@ public class UI {
 			aItem.setTitle(title);
 		}
 		
+		while(true) {
+			System.out.printf("\n일시(형식 1906051231) : ");
+			String day = sc.nextLine();
+			if(day.length() == 0) break;
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyMMddHHmm");
+			java.util.Date days = null;
+			try {
+				days = formatter.parse(day);
+			} catch (ParseException e) {
+				System.out.println("형식에 맞춰 입력해주세요.");
+				continue;
+			}
+			Timestamp created = new Timestamp(days.getTime());
+			if(created != null) {
+				aItem.setCreated(created);
+			}
+			break;
+		}
+		
 		while(true) {			
 			System.out.printf("\n분류(1.카드, 2.현금, 3.계좌) : ");
 			try {
@@ -544,6 +576,25 @@ public class UI {
 		String title = sc.nextLine();
 		if(title.length() != 0) {
 			aItem.setTitle(title);
+		}
+		
+		while(true) {
+			System.out.printf("\n일시(형식 1906051231) : ");
+			String day = sc.nextLine();
+			if(day.length() == 0) break;
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyMMddHHmm");
+			java.util.Date days = null;
+			try {
+				days = formatter.parse(day);
+			} catch (ParseException e) {
+				System.out.println("형식에 맞춰 입력해주세요.");
+				continue;
+			}
+			Timestamp created = new Timestamp(days.getTime());
+			if(created != null) {
+				aItem.setCreated(created);
+			}
+			break;
 		}
 		
 		while(true) {			
@@ -917,7 +968,6 @@ public class UI {
 		input = sc.nextLine();
 		filter.add(input);
 		
-		
 		List<AccountItem> list = AID.selectContainsTitle(filter);
 		System.out.printf("\n%s %-13s%-13s%s %s%14s %s\n", "번호", "내용", "일시", "분류", "구분", "금액", "증감");
 		for(AccountItem aItem : list) {
@@ -931,5 +981,43 @@ public class UI {
 						decimal.format(aItem.getPrice()), aItem.getWhether() == 0 ? "지출" : "수입");
 			}
 		}
+	}
+
+	private static void service(int account_id) {
+		
+		while(true) {			
+			System.out.printf("\n1.지출 분야별 비율\n2.저번 달 수입 중 저축 비율\n3.월별 수입 대 지출\n0.상위 메뉴\n00.종료\n선택 : ");
+			try {
+				String input = sc.nextLine();
+				Integer.parseInt(input);
+
+				if(input.equals("00")) {
+					System.out.println("프로그램을 종료합니다.");
+					sc.close();
+					AID.closeAll();
+					System.exit(0);
+				} else if(input.equals("0")) {
+					accountMain(account_id);
+				}
+				if(input.equals("1")) {
+					SS.expendService(account_id);
+				} else if(input.equals("2")) {
+					System.out.println("개발중");
+					continue;
+				} else if(input.equals("3")) {
+					System.out.println("개발중");
+					continue;
+				} else {
+					System.out.println("다시 입력해주세요.");
+					continue;
+				}
+				break;
+			} catch(Exception e) {
+				System.out.println("숫자만 입력하세요.");
+				continue;
+			}
+		}
+		
+		
 	}
 }
