@@ -1,6 +1,7 @@
 package kr.ac.kopo.ctc.kopo08.service;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import kr.ac.kopo.ctc.kopo08.dao.AccountItemDao;
@@ -102,6 +103,13 @@ public class StatisticsServiceImpl implements StatisticsService {
 	@Override
 	public AccountItem saveService() {
 		// 저번달 수입 중 저축 비율
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR) % 100;
+		String month = String.valueOf(cal.get(Calendar.MONTH) < 10 ? "0" + cal.get(Calendar.MONTH) : cal.get(Calendar.MONTH));
+		
+		System.out.println(year + "-" + month);
+		
 		return null;
 	}
 
