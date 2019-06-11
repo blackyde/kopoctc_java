@@ -7,8 +7,8 @@ public interface StatisticsService {
 	AccountItem expendService(int account_id);
 	
 	//저번 달 수입 중 저축 비율
-	AccountItem saveService();
+	AccountItem saveService(int account_id);
 	
 	//월별 수입 : 지출
-	AccountItem ratioService();
+	AccountItem ratioService(int account_id);
 }

@@ -6,8 +6,8 @@ public class ServiceTest {
 		
 		StatisticsService service = new StatisticsServiceImpl();
 		//service.expendService(1);
-		service.saveService();
-
+		//service.saveService(1);
+		service.ratioService(1);
 	}
 
 }

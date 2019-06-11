@@ -1,6 +1,7 @@
 package kr.ac.kopo.ctc.kopo08.service;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,13 +10,14 @@ import kr.ac.kopo.ctc.kopo08.dao.AccountItemDaoImpl;
 import kr.ac.kopo.ctc.kopo08.domain.AccountItem;
 
 public class StatisticsServiceImpl implements StatisticsService {
+	
+	public static AccountItemDao AID = new AccountItemDaoImpl();
 
 	@Override
 	public AccountItem expendService(int account_id) {
 		// 지출 분야별 비율
 		// 전체 소비금액에서 각 분야가 차지하는 비율
-		AccountItemDao dao = new AccountItemDaoImpl();
-		List<AccountItem> list = dao.selectAll();
+		List<AccountItem> list = AID.selectAll();
 		DecimalFormat df = new DecimalFormat("###,###,###,###,###");
 		int sum = 0;
 		int FOOD = 0;
@@ -101,21 +103,107 @@ public class StatisticsServiceImpl implements StatisticsService {
 	}
 
 	@Override
-	public AccountItem saveService() {
+	public AccountItem saveService(int account_id) {
 		// 저번달 수입 중 저축 비율
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR) % 100;
-		String month = String.valueOf(cal.get(Calendar.MONTH) < 10 ? "0" + cal.get(Calendar.MONTH) : cal.get(Calendar.MONTH));
+		int month = cal.get(Calendar.MONTH);
 		
-		System.out.println(year + "-" + month);
+		if(month == 0) {
+			year -= 1;
+			month = 12;
+		}
+		
+		String when = year + "-" + (month < 10 ? "0" + month : month);
+		List<String> filter = new ArrayList<String>();
+		filter.add("created");
+		filter.add(when);
+		List<AccountItem> list = AID.selectContainsTitle(filter);
+		int sum = 0;
+		int SAVE = 0;
+		for(AccountItem aItem : list) {
+			if(aItem.getAccount().getId() == account_id && aItem.getWhether() == 1) {
+				sum += aItem.getPrice();
+				if(aItem.getCategory().equals("저축/보험")) {
+					SAVE += aItem.getPrice();
+				}
+			}
+		}
+		
+		double result = 0.0;
+		if(sum != 0) {
+			result = (SAVE / (double)sum) * 100;
+			System.out.println("\n저번 달 수입 중 저축 비율");
+			System.out.println();
+			System.out.println(result + "%");
+			System.out.println();
+		} else {
+			System.out.println("수입이 없어 통계를 낼 수 없습니다.");
+		}
+		
+		switch((int)result / 10) {
+		case 10 : System.out.println("스크루지"); break;
+		case 9 : System.out.println("구두쇠"); break;
+		case 8 : System.out.println("수전노"); break;
+		case 7 : System.out.println("자린고비"); break;
+		case 6 : System.out.println("훌륭해"); break;
+		case 5 : System.out.println("저축왕"); break;
+		case 4 : System.out.println("이정도만 유지해도"); break;
+		case 3 : System.out.println("아직 위험한 수준은 아니야"); break;
+		case 2 : System.out.println("저축을 좀 늘려볼까"); break;
+		case 1 : System.out.println("욜로?"); break;
+		case 0 : System.out.println("늙으면 죽음"); break;
+		}
 		
 		return null;
 	}
 
 	@Override
-	public AccountItem ratioService() {
+	public AccountItem ratioService(int account_id) {
 		// 월별 수입 : 지출 비 (지난 1년)
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR) % 100;
+		int month = cal.get(Calendar.MONTH);
+		if(month == 0) {
+			year -= 1;
+			month = 12;
+		}
+		
+		for(int i = 0; i < 12; i++) {
+			int PLUS = 0;
+			int MINUS = 0;
+			String when = year + "-" + (month < 10 ? "0" + month : month);
+			List<String> filter = new ArrayList<String>();
+			filter.add("created");
+			filter.add(when);
+			List<AccountItem> list = AID.selectContainsTitle(filter);
+			for(AccountItem aItem : list) {
+				if(aItem.getAccount().getId() == account_id) {
+					if(aItem.getWhether() == 1) PLUS += aItem.getPrice();
+					if(aItem.getWhether() == 0) MINUS += aItem.getPrice();
+				}
+			}
+			double ratio;
+			if(PLUS + MINUS != 0) {
+				ratio = PLUS / (double)(PLUS + MINUS) * 100;
+				System.out.printf("\n%02d년 %02d월 수입 : 지출 = %.2f : %.2f",
+						year, month,
+						ratio,
+						100 - ratio);
+			} else {
+				System.out.printf("\n%02d년 %02d월 기록이 없습니다.", year, month);
+			}
+			
+			month--;
+			if(month == 0) {
+				year -= 1;
+				month = 12;
+			}
+		}
+		
+		System.out.println();
 		return null;
 	}
 

@@ -172,9 +172,6 @@ public class UI {
 				selectMain(account_id);
 			} else if(input.equals("5")) {
 				service(account_id);
-				System.out.println("\n엔터를 누르면 이전 화면으로 돌아갑니다.");
-				sc.nextLine();
-				service(account_id);
 			} else {
 				System.out.println("다시 입력해주세요.");
 				continue;
@@ -1001,12 +998,19 @@ public class UI {
 				}
 				if(input.equals("1")) {
 					SS.expendService(account_id);
+					System.out.println("\n엔터를 누르면 이전 화면으로 돌아갑니다.");
+					sc.nextLine();
+					service(account_id);
 				} else if(input.equals("2")) {
-					System.out.println("개발중");
-					continue;
+					SS.saveService(account_id);
+					System.out.println("\n엔터를 누르면 이전 화면으로 돌아갑니다.");
+					sc.nextLine();
+					service(account_id);
 				} else if(input.equals("3")) {
-					System.out.println("개발중");
-					continue;
+					SS.ratioService(account_id);
+					System.out.println("\n엔터를 누르면 이전 화면으로 돌아갑니다.");
+					sc.nextLine();
+					service(account_id);
 				} else {
 					System.out.println("다시 입력해주세요.");
 					continue;
