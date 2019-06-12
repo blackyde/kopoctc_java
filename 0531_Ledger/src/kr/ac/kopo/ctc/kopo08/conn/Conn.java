@@ -18,8 +18,7 @@ public class Conn {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://" + ADDRESS + "/" + DB_NAME, USERNAME, PASSWORD);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("DB 연결 실패");
 		}
 		return conn;
 	}
