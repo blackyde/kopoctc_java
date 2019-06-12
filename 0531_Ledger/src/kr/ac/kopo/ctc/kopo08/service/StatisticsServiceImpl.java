@@ -138,22 +138,21 @@ public class StatisticsServiceImpl implements StatisticsService {
 			System.out.println();
 			System.out.println(result + "%");
 			System.out.println();
+			switch((int)result / 10) {
+			case 10 : System.out.println("스크루지"); break;
+			case 9 : System.out.println("구두쇠"); break;
+			case 8 : System.out.println("수전노"); break;
+			case 7 : System.out.println("자린고비"); break;
+			case 6 : System.out.println("훌륭해"); break;
+			case 5 : System.out.println("저축왕"); break;
+			case 4 : System.out.println("이정도만 유지해도"); break;
+			case 3 : System.out.println("아직 위험한 수준은 아니야"); break;
+			case 2 : System.out.println("저축을 좀 늘려볼까"); break;
+			case 1 : System.out.println("욜로?"); break;
+			case 0 : System.out.println("늙으면 죽음"); break;
+			}
 		} else {
 			System.out.println("수입이 없어 통계를 낼 수 없습니다.");
-		}
-		
-		switch((int)result / 10) {
-		case 10 : System.out.println("스크루지"); break;
-		case 9 : System.out.println("구두쇠"); break;
-		case 8 : System.out.println("수전노"); break;
-		case 7 : System.out.println("자린고비"); break;
-		case 6 : System.out.println("훌륭해"); break;
-		case 5 : System.out.println("저축왕"); break;
-		case 4 : System.out.println("이정도만 유지해도"); break;
-		case 3 : System.out.println("아직 위험한 수준은 아니야"); break;
-		case 2 : System.out.println("저축을 좀 늘려볼까"); break;
-		case 1 : System.out.println("욜로?"); break;
-		case 0 : System.out.println("늙으면 죽음"); break;
 		}
 		
 		return null;
