@@ -60,7 +60,7 @@ public class Main02 {
 		
 		dataSet();
 		//데이터 생성
-		//dataSort();
+		dataSort();
 		//데이터 정렬
 		
 		Calendar cal = Calendar.getInstance();

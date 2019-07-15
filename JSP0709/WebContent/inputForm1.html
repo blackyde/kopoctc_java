@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<style>
+table, tr, th, td {
+	border: 1px solid #000000;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+span {
+	color: red;
+	font-size: 10px;
+}
+</style>
+<script>
+function check(which) {
+	var fr = document.forms["inputForm1"];
+	var form = fr[which];
+	var where = which + "Alert";
+	
+	if(isNaN(form.value)) {
+		form.value="";
+		document.getElementById(where).innerHTML=("숫자만 입력하세요.");		
+	} else if(form.value > 100) {
+		form.value="";
+		document.getElementById(where).innerHTML=("0에서 100 사이로 입력하세요.");
+	} else {
+		document.getElementById(where).innerHTML=("");
+	}
+}
+function checkAll() {
+	var fr = document.forms["inputForm1"];
+	if(fr["name"].value.length < 1 || fr["name"].value.trim().length < 1) {
+		document.inputForm1.name.focus();
+		return false;
+	}
+	if(fr["kor"].value.length < 1) {
+		document.inputForm1.kor.focus();
+		return false;
+	}
+	if(fr["eng"].value.length < 1) {
+		document.inputForm1.eng.focus();
+		return false;
+	} 
+	if(fr["mat"].value.length < 1) {
+		document.inputForm1.mat.focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body>
+	<h2>성적입력추가</h2>
+	<form method="post" action="?contentPage=insertDB.jsp" name="inputForm1" onsubmit="return checkAll()">
+		<table>
+			<colgroup>
+				<col style="width: 60px;"/>
+				<col style="width: 400px;"/>
+			</colgroup>
+			<tr>
+				<th>이름</th>
+				<td>
+					<input type="text" name="name" id="name">
+					<script>    
+					    // 입력을 제한 할 특수문자의 정규식
+					    var replaceId  = /[<>()!0-9/*@#$%^&+_='"\-\\]/gi;
+					    
+					    $(document).ready(function(){
+					        
+					        $("#name").on("focusout", function() {
+					        	trim($("#name"));
+					            var x = $(this).val();
+					            if (x.length > 0) {
+					                if (x.match(replaceId)) {
+					                   x = x.replace(replaceId, "");
+					                }
+					                $(this).val(x);
+					            }
+					        }).on("keyup", function() {
+					            $(this).val($(this).val().replace(replaceId, ""));
+					
+					        });
+					
+					    });					 
+					</script>					
+					<span id="nameAlert"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>학번</th>
+				<td>
+					<input type="text" name="studentid" id="studentid" value="자동입력" readonly>
+					<span id="studentidAlert"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>국어</th>
+				<td>
+					<input type="text" name="kor" id="kor" onkeyup="check('kor')">
+					<span id="korAlert"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>영어</th>
+				<td>
+					<input type="text" name="eng" id="eng" onkeyup="check('eng')">
+					<span id="engAlert"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>수학</th>
+				<td>
+					<input type="text" name="mat" id="mat" onkeyup="check('mat')">
+					<span id="matAlert"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="reset" value="취소">
+					<input type="submit" value="확인">
+				</td>
+			</tr>
+		</table>
+
+
+	</form>
+</body>
+</html>

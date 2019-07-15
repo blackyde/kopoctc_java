@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+table, tr, th, td {
+	border: 1px solid #000000;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+span {
+	color: red;
+}
+</style>
+<script>
+function check(which) {
+	var fr = document.forms["inputForm2"];
+	var form = fr[which];
+	var where = which + "Alert";
+	
+	if(isNaN(form.value)) {
+		form.value="";
+		document.getElementById(where).innerHTML=("숫자만 입력하세요.");		
+	} else {
+		document.getElementById(where).innerHTML=("");
+	}
+}
+function checkAll() {
+	var fr = document.forms["inputForm2"];
+	if(fr["id"].value.length < 6) {
+		document.inputForm2.id.focus();
+		document.getElementById("idAlert").innerHTML=("학번은 6자리 숫자입니다. ex)209901");
+		return false;
+	}
+	if(fr["id"].value.length > 6) {
+		document.inputForm2.id.focus();
+		document.getElementById("idAlert").innerHTML=("학번은 6자리 숫자입니다. ex)209901");
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body>
+	<h2>성적 조회후 정정/삭제</h2>
+	<form method="post" action="?contentPage=showREC.jsp" name="inputForm2" onsubmit="return checkAll()">
+	
+		<table style="border: 0px;">
+			<colgroup>
+				<col style="width: 100px;"/>
+				<col style="width: 200px;"/>
+				<col />
+			</colgroup>
+			<tr style="border: 0px;">
+				<th style="border: 0px;">조회할 학번</th>
+				<td style="border: 0px;">
+					<input type="text" name="id" id="id" onkeyup="check('id')">
+				</td>
+				<td style="border: 0px;"><input type="submit" value="조회"></td>
+			</tr>
+			<tr style="border: 0px;">
+				<td colspan="3" style="text-align: center; border: 0px;"><span id="idAlert" style="display: inline-block; "></span></td>
+			</tr>
+		</table>
+	</form>
+	<table>
+		<colgroup>
+			<col style="width: 60px;"/>
+			<col style="width: 400px;"/>
+		</colgroup>
+		<tr>
+			<th>이름</th>
+			<td>
+				<input type="text" name="name" id="name" readonly>
+				<span id="nameAlert"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>학번</th>
+			<td>
+				<input type="text" name="studentid" id="studentid" readonly>
+				<span id="studentidAlert"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>국어</th>
+			<td>
+				<input type="text" name="kor" id="kor" readonly>
+				<span id="korAlert"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>영어</th>
+			<td>
+				<input type="text" name="eng" id="eng" readonly>
+				<span id="engAlert"></span>
+			</td>
+		</tr>
+		<tr>
+			<th>수학</th>
+			<td>
+				<input type="text" name="mat" id="mat" readonly>
+				<span id="matAlert"></span>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
