@@ -16,7 +16,20 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	public List<Twice> once;
 
 	@Override
-	public Twice insert(Twice t) throws SQLException {
+	public Twice insert(Twice t) {
+		// TODO Auto-generated method stub
+		try {
+			t = insert_override(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			t = null;
+			e.printStackTrace();
+		}
+		return t;
+	}
+	
+	@Override
+	public Twice insert_override(Twice t) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("INSERT INTO twicecompany (`goods_id`,"
 				+ "`goods_name`, `stock`, `describe`, `image`) VALUES ("
@@ -29,12 +42,25 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		
-		t = selectOne(t);		
+		t = selectOne(t);
 		return t;
 	}
 
 	@Override
-	public Twice selectOne(Twice t) throws SQLException {
+	public Twice selectOne(Twice t) {
+		// TODO Auto-generated method stub
+		try {
+			t = selectOne_override(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			t = null;
+			e.printStackTrace();
+		}
+		return t;
+	}
+	
+	@Override
+	public Twice selectOne_override(Twice t) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("SELECT * FROM twicecompany"
 				+ " WHERE `goods_id` = %d",
@@ -58,7 +84,20 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	}
 
 	@Override
-	public List<Twice> select() throws SQLException {
+	public List<Twice> select() {
+		// TODO Auto-generated method stub
+		try {
+			once = select_override();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			once = null;
+			e.printStackTrace();
+		}
+		return once;
+	}
+	
+	@Override
+	public List<Twice> select_override() throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("SELECT * FROM twicecompany");
 		pstmt = CONN.prepareStatement(sql);
@@ -81,7 +120,20 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	}
 
 	@Override
-	public Twice update(Twice t) throws SQLException {
+	public Twice update(Twice t) {
+		// TODO Auto-generated method stub
+		try {
+			t = update_override(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			t = null;
+			e.printStackTrace();
+		}
+		return t;
+	}
+	
+	@Override
+	public Twice update_override(Twice t) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("UPDATE twicecompany SET "
 				+ "`goods_name` = '%s', "
@@ -102,13 +154,27 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	}
 
 	@Override
-	public void delete(Twice t) throws SQLException {
+	public int delete(Twice t) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		try {
+			result = delete_override(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int delete_override(Twice t) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("DELETE FROM twicecompany "
 				+ "WHERE `goods_id` = %d",
 				t.getGoods_id());
 		pstmt = CONN.prepareStatement(sql);
-		pstmt.executeUpdate();
+		
+		return pstmt.executeUpdate();
 	}
 	
 }
