@@ -151,7 +151,7 @@
 
       	<Context docBase="JSP0708" path="/JSP0708" reloadable="true" source="org.eclipse.jst.jee.server:JSP0708"/>
       	<Context docBase="JSP0709" path="/JSP0709" reloadable="true" source="org.eclipse.jst.jee.server:JSP0709"/>
-      <Context docBase="Vote" path="/Vote" reloadable="true" source="org.eclipse.jst.jee.server:Vote"/><Context docBase="TwiceCompany" path="/TwiceCompany" reloadable="true" source="org.eclipse.jst.jee.server:TwiceCompany"/></Host>
+      <Context docBase="Vote" path="/Vote" reloadable="true" source="org.eclipse.jst.jee.server:Vote"/><Context docBase="TwiceCompany" path="/TwiceCompany" reloadable="true" source="org.eclipse.jst.jee.server:TwiceCompany"/><Context docBase="Board" path="/Board" reloadable="true" source="org.eclipse.jst.jee.server:Board"/></Host>
     </Engine>
   </Service>
 </Server>

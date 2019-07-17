@@ -86,9 +86,9 @@ a {
 					rset = stmt.executeQuery("SELECT * FROM examtable");
 					while (rset.next()) {
 						Student st = new Student(
-								rset.getString(1), rset.getInt(2),
-								rset.getInt(3), rset.getInt(4), rset.getInt(5)
-								);
+							rset.getString(1), rset.getInt(2),
+							rset.getInt(3), rset.getInt(4), rset.getInt(5)
+						);
 						ls.add(st);
 					}
 					

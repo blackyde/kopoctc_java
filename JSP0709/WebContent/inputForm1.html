@@ -38,19 +38,19 @@ function check(which) {
 function checkAll() {
 	var fr = document.forms["inputForm1"];
 	if(fr["name"].value.length < 1 || fr["name"].value.trim().length < 1) {
-		document.inputForm1.name.focus();
+		fr["name"].focus();
 		return false;
 	}
 	if(fr["kor"].value.length < 1) {
-		document.inputForm1.kor.focus();
+		fr["kor"].focus();
 		return false;
 	}
 	if(fr["eng"].value.length < 1) {
-		document.inputForm1.eng.focus();
+		fr["eng"].focus();
 		return false;
 	} 
 	if(fr["mat"].value.length < 1) {
-		document.inputForm1.mat.focus();
+		fr["mat"].focus();
 		return false;
 	}
 	return true;
