@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
+<%@ page import = "com.twice.dto.Twice" %>
+<%@ page import = "com.twice.dao.*" %>
+<%
+TwiceDao<Twice> td = new TwiceDaoImpl();
+List<Twice> once = td.select();
+List<Integer> id = new ArrayList<Integer>();
+for(Twice t : once) {
+	id.add(t.getGoods_id());
+}
+int goods_id = Collections.max(id) + 1;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +23,12 @@
 		<tbody>
 			<tr>
 				<th>상품번호</th>
-				<td></td>
+				<td><%=goods_id %></td>
 			<tr>
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="subject" id="subject" maxlength="50">
+					<input type="text" name="goods_name" id="goods_name" maxlength="50">
 					<script>
 					// 입력을 제한 할 특수문자의 정규식			
 					var replaceId = /[<>]/gi;
@@ -41,8 +53,10 @@
 				</td>
 			</tr>
 			<tr>
-				<th>일자</th>
-				<td></td>
+				<th>현재 재고수</th>
+				<td>
+					<input type="text" name="goods_name" id="goods_name" maxlength="50">					
+				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
