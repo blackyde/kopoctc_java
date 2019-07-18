@@ -37,6 +37,8 @@ public class Lec02 {
 		double minDist = 1.0;
 		int max = 0;
 		int min = 0;
+		String maxPlace = "";
+		String minPlace = "";
 		while((readtxt = br.readLine()) != null) {
 			
 			String[] field = readtxt.split("\t");
@@ -52,17 +54,20 @@ public class Lec02 {
 			if(dist > maxDist) {
 				maxDist = dist;
 				max = lineCnt;
+				maxPlace = field[9];
 			}
 			if(dist < minDist) {
 				minDist = dist;
 				min = lineCnt;
+				minPlace = field[9];
 			}
 			//거리 = sqrt((위도1 - 위도2)^2 + (경도1 - 경도2)^2)
 			System.out.printf(" 현재지점과 거리 : %f\n", dist);
 			System.out.printf("*******************************\n");
 			lineCnt++;
 		}
-		System.out.printf("최대거리 : %d번째 - %f, 최소거리 : %d번째 - %f", max, maxDist, min, minDist);
+		System.out.printf("최대거리 : %d번째 - %f, %s\n", max, maxDist, maxPlace);
+		System.out.printf("최소거리 : %d번째 - %f, %s", min, minDist, minPlace);
 		br.close();
 
 	}
