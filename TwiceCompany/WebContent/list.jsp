@@ -67,6 +67,14 @@
 	}
 	%>
 		<tr>
+			<td colspan="5" class="right">
+				<form method="post" action="/TwiceCompany/" class="inline">
+					<input type="hidden" name="contentPage" value="write.jsp">
+					<input type="submit" value="글쓰기">
+				</form>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="5" class="center">
 	<% if(!(start == 1)) { %>				
 				<form method="post" action="/TwiceCompany/" class="inline">

@@ -31,10 +31,9 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	@Override
 	public Twice insert_override(Twice t) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql = String.format("INSERT INTO twicecompany (`goods_id`,"
+		String sql = String.format("INSERT INTO twicecompany ("
 				+ "`goods_name`, `stock`, `describe`, `image`) VALUES ("
 				+ "%d, '%s', %d, '%s', '%s')",
-				t.getGoods_id(),
 				t.getGoods_name(),
 				t.getStock(),
 				t.getDescribe(),
