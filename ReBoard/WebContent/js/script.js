@@ -1,19 +1,11 @@
 function checkAll() {
 	var fr = document.forms["inputForm"];
-	if(fr["goods_name"].value.length < 1 || fr["goods_name"].value.trim().length < 1) {
-		fr["goods_name"].focus();
+	if(fr["subject"].value.length < 1 || fr["subject"].value.trim().length < 1) {
+		fr["subject"].focus();
 		return false;
 	}
-	if(fr["stock"].value.length < 1 || fr["stock"].value.trim().length < 1) {
-		fr["stock"].focus();
-		return false;
-	}
-	if(fr["describe"].value.length < 1 || fr["describe"].value.trim().length < 1) {
-		fr["describe"].focus();
-		return false;
-	}
-	if(fr["image"].value.length < 1 || fr["image"].value.trim().length < 1) {
-		fr["image"].focus();
+	if(fr["contents"].value.length < 1 || fr["contents"].value.trim().length < 1) {
+		fr["contents"].focus();
 		return false;
 	}
 	return true;
@@ -38,9 +30,11 @@ function checkDelete() {
 	var answer = confirm("정말 삭제하시겠습니까?");
 	return answer;
 }
-function check(which) {
-	var fr = document.forms["inputForm"];
-	if(isNaN(fr[which].value)) {
-		fr[which].value="";
-	}
+function go_view(write_num){
+    
+    document.wform.write_num.value = write_num;
+    document.wform.contentPage.value = "item.jsp";
+    document.wform.action = "/ReBoard/";
+    document.wform.submit();
+
 }

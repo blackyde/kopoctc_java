@@ -33,7 +33,7 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 		// TODO Auto-generated method stub
 		String sql = String.format("INSERT INTO twicecompany ("
 				+ "`goods_name`, `stock`, `describe`, `image`) VALUES ("
-				+ "%d, '%s', %d, '%s', '%s')",
+				+ "'%s', %d, '%s', '%s')",
 				t.getGoods_name(),
 				t.getStock(),
 				t.getDescribe(),
@@ -98,7 +98,8 @@ public class TwiceDaoImpl implements TwiceDao<Twice> {
 	@Override
 	public List<Twice> select_override() throws SQLException {
 		// TODO Auto-generated method stub
-		String sql = String.format("SELECT * FROM twicecompany");
+		String sql = String.format("SELECT * FROM twicecompany"
+				+ " ORDER BY u_date DESC");
 		pstmt = CONN.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		once = new ArrayList<Twice>();

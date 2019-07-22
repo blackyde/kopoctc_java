@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
-<%@ page import = "com.twice.dto.Twice" %>
-<%@ page import = "com.twice.dao.*" %>
+<%@ page import = "com.board.dto.*" %>
+<%@ page import = "com.board.dao.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>트와이스</title>
+<title>공지사항</title>
 <link rel="shortcut icon" href="/Vote/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/Vote/favicon.ico" type="image/x-icon">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

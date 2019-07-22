@@ -3,6 +3,7 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "com.twice.dto.Twice" %>
 <%@ page import = "com.twice.dao.*" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -17,6 +18,7 @@
 	t.setGoods_id(goods_id);
 	t = td.selectOne(t);
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 <!DOCTYPE html>
 <html>
@@ -42,19 +44,37 @@
 		</tr>
 		<tr>
 			<th>재고파악일</th>
-			<td><%=t.getU_date() %></td>
+			<td><%=sdf.format(t.getU_date()) %></td>
 		</tr>
 		<tr>
 			<th>상품등록일</th>
-			<td><%=t.getC_date() %></td>
+			<td><%=sdf.format(t.getC_date()) %></td>
 		</tr>
 		<tr>
 			<th>상품설명</th>
-			<td><%=t.getDescribe() %></td>
+			<td><textarea cols="50" rows="10" readonly><%=t.getDescribe() %></textarea></td>
 		</tr>
 		<tr>
 			<th>상품사진</th>
-			<td><%=t.getImage() %></td>
+			<td><img src="upload/<%=t.getImage() %>" style="max-width: 400px;"/></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="right">
+				<form method="post" action="/TwiceCompany/" class="inline">
+					<input type="hidden" name="contentPage" value="list.jsp">
+					<input type="submit" value="리스트로 돌아가기">
+				</form>
+				<form method="post" action="/TwiceCompany/" class="inline">
+					<input type="hidden" name="goods_id" value="<%=t.getGoods_id() %>">
+					<input type="hidden" name="contentPage" value="update.jsp">
+					<input type="submit" value="수정">
+				</form>
+				<form method="post" action="/TwiceCompany/" class="inline" onsubmit="return checkDelete()">
+					<input type="hidden" name="goods_id" value="<%=t.getGoods_id() %>">
+					<input type="hidden" name="contentPage" value="delete.jsp">
+					<input type="submit" value="삭제">
+				</form>
+			</td>
 		</tr>
 	</tbody>
 </table>

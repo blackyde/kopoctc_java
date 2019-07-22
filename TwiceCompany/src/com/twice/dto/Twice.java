@@ -16,9 +16,8 @@ public class Twice {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Twice(int goods_id, String goods_name,
+	public Twice(String goods_name,
 			int stock, String describe, String image) {
-		this.goods_id = goods_id;
 		this.goods_name = goods_name;
 		this.stock = stock;
 		this.describe = describe;
