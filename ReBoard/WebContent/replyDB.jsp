@@ -11,17 +11,19 @@
 	String contents = request.getParameter("contentsFinal");
 	String rootids = request.getParameter("rootid");
 	String relevels = request.getParameter("relevel");
+	String recnts = request.getParameter("recnt");
 	int rootid = Integer.parseInt(rootids);
 	int relevel = Integer.parseInt(relevels);
+	int recnt = Integer.parseInt(recnts);
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board(subject, contents, rootid, relevel);
-	bb.insert(b);
-	List<Board> lb = bb.selectDesc();
+	b.setRecnt(recnt);
+	bb.reCnt(b);
+	bb.reInsert(b);
 	
 %>
 <form method="post" action="/ReBoard/" name="fr">
-	<input type="hidden" name="contentPage" value="item.jsp">
-	<input type="hidden" name="write_num" value="<%=lb.get(0).getWrite_num() %>">
+	<input type="hidden" name="contentPage" value="list.jsp">
 </form>
 <script>
 fr.submit();

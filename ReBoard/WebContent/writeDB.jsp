@@ -10,7 +10,7 @@
 	String subject = request.getParameter("subject");
 	String contents = request.getParameter("contents");
 	if(subject == null || contents == null) {
-		response.sendRedirect("/Board/");
+		response.sendRedirect("/ReBoard/");
 	}
 	
 	BoardDao<Board> bb = new BoardDaoImpl();
@@ -19,12 +19,9 @@
 	b.setContents(contents);
 	bb.insert(b);
 	
-	List<Board> lb = bb.selectDesc();
-	
 %>
-<form method="post" action="/Board/" name="fr">
-	<input type="hidden" name="contentPage" value="item.jsp">
-	<input type="hidden" name="write_num" value="<%=lb.get(0).getWrite_num() %>">
+<form method="post" action="/ReBoard/" name="fr">
+	<input type="hidden" name="contentPage" value="list.jsp">
 </form>
 <script>
 fr.submit();

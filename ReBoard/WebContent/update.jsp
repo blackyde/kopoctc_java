@@ -84,18 +84,18 @@
 		</tr>
 		<tr>
 			<td colspan="2" class="right">
-				<form method="post" action="/Board/" class="inline">
+				<form method="post" action="/ReBoard/" class="inline">
 					<input type="hidden" name="contentPage" value="list.jsp">
 					<input type="submit" value="취소">
 				</form>
-				<form method="post" action="/Board/" class="inline" name="updateForm" onsubmit="return checkUpdate()">
+				<form method="post" action="/ReBoard/" class="inline" name="updateForm" onsubmit="return checkUpdate()">
 					<input type="hidden" name="write_num" value="<%=b.getWrite_num()%>">
 					<input type="hidden" id="subjectFinal" name="subjectFinal" value="<%=b.getSubject()%>">
 					<input type="hidden" id="contentsFinal" name="contentsFinal" value="<%=b.getContents()%>">
 					<input type="hidden" name="contentPage" value="updateDB.jsp">
 					<input type="submit" value="쓰기">
 				</form>
-				<form method="post" action="/Board/" class="inline" name="deleteForm" onsubmit="return checkDelete()">
+				<form method="post" action="/ReBoard/" class="inline" name="deleteForm" onsubmit="return checkDelete()">
 					<input type="hidden" name="contentPage" value="delete.jsp">
 					<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
 					<input type="submit" value="삭제">

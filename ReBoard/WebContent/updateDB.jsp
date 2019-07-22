@@ -11,7 +11,7 @@
 	String subject = request.getParameter("subjectFinal");
 	String contents = request.getParameter("contentsFinal");
 	if(subject == null || contents == null) {
-		response.sendRedirect("/Board/");
+		response.sendRedirect("/ReBoard/");
 	}
 	
 	int write_num = Integer.parseInt(write_nums);
@@ -25,7 +25,7 @@
 	b = bb.selectOne(b);
 	
 %>
-<form method="post" action="/Board/" name="fr">
+<form method="post" action="/ReBoard/" name="fr">
 	<input type="hidden" name="contentPage" value="item.jsp">
 	<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
 </form>

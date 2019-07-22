@@ -84,6 +84,7 @@
 					<input type="hidden" id="subjectFinal" name="subjectFinal" value="<%=b.getSubject()%>">
 					<input type="hidden" id="contentsFinal" name="contentsFinal" value="<%=b.getContents()%>">
 					<input type="hidden" id="rootid" name="rootid" value="<%=b.getRootid()%>">
+					<input type="hidden" id="recnt" name="recnt" value="<%=b.getRecnt() + 1%>">
 					<input type="hidden" id="relevel" name="relevel" value="<%=b.getRelevel() + 1%>">
 					<input type="hidden" name="contentPage" value="replyDB.jsp">
 					<input type="submit" value="쓰기">

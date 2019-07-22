@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<form method="post" action="/Board/" name="inputForm" onsubmit="return checkAll()">
+<form method="post" action="/ReBoard/" name="inputForm" onsubmit="return checkAll()">
 	<table class="table">
 		<tbody>
 			<tr>
@@ -73,7 +73,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="right">
-					<input type="reset" value="취소">
+					<input type="button" onclick="location.href='/ReBoard/'" value="취소">
 					<input type="hidden" name="contentPage" value="writeDB.jsp">
 					<input type="submit" value="쓰기">
 				</td>

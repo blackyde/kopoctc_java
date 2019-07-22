@@ -18,12 +18,32 @@ public class BoardDaoImpl implements BoardDao<Board> {
 	public Board insert(Board b) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("INSERT INTO board (`subject`,"
-				+ "`contents`, `rootid`, `relevel`) VALUES ("
+				+ "`contents`, `relevel`, `recnt`) VALUES ("
 				+ "'%s', '%s', %d, %d)",
+				b.getSubject(),
+				b.getContents(), 0, 0);
+		pstmt = CONN.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		sql = String.format("UPDATE board SET `rootid` = `write_num` WHERE `relevel` = 0");
+		pstmt = CONN.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		b = selectOne(b);
+		return b;
+	}
+	
+	@Override
+	public Board reInsert(Board b) throws SQLException {
+		// TODO Auto-generated method stub
+		String sql = String.format("INSERT INTO board (`subject`,"
+				+ "`contents`, `rootid`, `relevel`, `recnt`) VALUES ("
+				+ "'%s', '%s', %d, %d, %d)",
 				b.getSubject(),
 				b.getContents(),
 				b.getRootid(),
-				b.getRelevel());
+				b.getRelevel(),
+				b.getRecnt());
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		
@@ -34,7 +54,8 @@ public class BoardDaoImpl implements BoardDao<Board> {
 	@Override
 	public List<Board> select() throws SQLException {
 		// TODO Auto-generated method stub
-		String sql = String.format("SELECT * FROM board");
+		String sql = String.format("SELECT * FROM board "
+				+ "ORDER BY write_num DESC");
 		pstmt = CONN.prepareStatement(sql);
 		rs = pstmt.executeQuery();		
 		lb = new ArrayList<Board>();
@@ -60,7 +81,9 @@ public class BoardDaoImpl implements BoardDao<Board> {
 		// TODO Auto-generated method stub
 		String sql = String.format("SELECT * FROM board"
 				+ " ORDER BY rootid DESC, "
-				+ "relevel ASC");
+				+ "recnt ASC, "
+				+ "relevel ASC, "
+				+ "write_num DESC");
 		pstmt = CONN.prepareStatement(sql);
 		rs = pstmt.executeQuery();		
 		lb = new ArrayList<Board>();
@@ -149,8 +172,13 @@ public class BoardDaoImpl implements BoardDao<Board> {
 	public Board reCnt(Board b) throws SQLException {
 		String sql = String.format("UPDATE board SET "
 				+ "`recnt` = `recnt` + 1 "
-				+ "WHERE `rootid` = %d",
-				b.getRootid());
+				+ "WHERE `rootid` = %d "
+				+ "AND "
+				+ "`relevel` != 0 "
+				+ "AND "
+				+ "`recnt` >= %d",
+				b.getRootid(),
+				b.getRecnt());
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		b = selectOne(b);

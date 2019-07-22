@@ -9,6 +9,7 @@ public interface BoardDao<B> {
 	
 	//C
 	B insert(B b) throws SQLException;
+	B reInsert(B b) throws SQLException;
 	
 	//R
 	List<B> select() throws SQLException;
@@ -22,4 +23,6 @@ public interface BoardDao<B> {
 	
 	//D
 	void delete(B b) throws SQLException;
+
+	
 }
