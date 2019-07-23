@@ -40,6 +40,11 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 			if (fileItem.getSize() > 0) { //파일이 업로드 되었나 안되었나 체크 size>0이면 업로드 성공
 				String fieldName = fileItem.getFieldName();
 				String fileName = fileItem.getName();
+				File uploadedFile = new File(realDir, fileName);
+				while(uploadedFile.exists()) {
+					fileName = "_" + fileName;
+					uploadedFile = new File(realDir, fileName);
+				}
 				String contentType = fileItem.getContentType();
 				boolean isInMemory = fileItem.isInMemory();
 				long sizeInBytes = fileItem.getSize();
@@ -51,7 +56,7 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 				out.println("<br>");
 
 				try {
-					File uploadedFile = new File(realDir, fileName); //실제 디렉토리에 fileName으로 카피 된다.
+					uploadedFile = new File(realDir, fileName); //실제 디렉토리에 fileName으로 카피 된다.
 					//if(uploadedFile.exists()) {
 					//	uploadedFile = new File(realDir, "복사본_" + fileName);
 					//}
