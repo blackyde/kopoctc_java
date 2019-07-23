@@ -28,7 +28,13 @@
 <meta charset="UTF-8">
 </head>
 <body>
+<h3>글보기</h3>
+<hr>
 <table class="table">
+	<colgroup>
+		<col style="width: 20%;" />
+		<col width="*" />
+	</colgroup>
 	<tbody>
 		<tr>
 			<th>번호</th>
@@ -48,8 +54,8 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>
-				<textarea cols="50" rows="10" readonly><%=b.getContents() %></textarea>
+			<td>				
+				<%=b.getContents() %>
 			</td>
 		</tr>
 		<tr>
@@ -57,11 +63,11 @@
 			<td><%=b.getRootid() %></td>
 		</tr>
 		<tr>
-			<th>댓글수준</th>
+			<th>레벨</th>
 			<td><%=b.getRelevel() %></td>
 		</tr>
 		<tr>
-			<th>댓글순서</th>
+			<th>댓글 순서</th>
 			<td><%=b.getRecnt() %></td>
 		</tr>
 		<tr>
@@ -79,6 +85,11 @@
 					<input type="hidden" name="contentPage" value="update.jsp">
 					<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
 					<input type="submit" value="수정">
+				</form>
+				<form method="post" action="/ReBoard/" class="inline" name="deleteForm" onsubmit="return checkDelete()">
+					<input type="hidden" name="contentPage" value="delete.jsp">
+					<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
+					<input type="submit" value="삭제">
 				</form>
 			</td>
 		</tr>

@@ -18,6 +18,8 @@
 	b = bb.selectOne(b);
 	
 %>
+<h3>답글 달기</h3>
+<hr>
 <table class="table">
 	<tbody>
 		<tr>

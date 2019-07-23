@@ -1,3 +1,11 @@
+$(document).ready(function() {
+     $('#contents').summernote({
+             height: 300,                 // set editor height
+             minHeight: null,             // set minimum height of editor
+             maxHeight: null,             // set maximum height of editor
+             focus: true                  // set focus to editable area after initializing summernote
+     });
+});
 function checkAll() {
 	var fr = document.forms["inputForm"];
 	if(fr["subject"].value.length < 1 || fr["subject"].value.trim().length < 1) {

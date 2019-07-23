@@ -13,7 +13,10 @@
 	if(subject == null || contents == null) {
 		response.sendRedirect("/ReBoard/");
 	}
-	
+	subject = subject.replaceAll(";", "&#59;");
+	subject = subject.replaceAll("'", "&#39;");
+	contents = contents.replaceAll(";", "&#59;");
+	contents = contents.replaceAll("'", "&#39;");
 	int write_num = Integer.parseInt(write_nums);
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board();

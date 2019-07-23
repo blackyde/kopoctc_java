@@ -13,6 +13,11 @@
 		response.sendRedirect("/ReBoard/");
 	}
 	
+	subject = subject.replaceAll(";", "&#59;");
+	subject = subject.replaceAll("'", "&#39;");
+	contents = contents.replaceAll(";", "&#59;");
+	contents = contents.replaceAll("'", "&#39;");
+	
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board();
 	b.setSubject(subject);

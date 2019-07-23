@@ -18,6 +18,8 @@
 	b = bb.selectOne(b);
 	
 %>
+<h3>글 수정</h3>
+<hr>
 <table class="table">
 	<tbody>
 		<tr>

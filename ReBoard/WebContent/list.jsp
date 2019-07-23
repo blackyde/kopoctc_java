@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
@@ -24,6 +25,8 @@
 <meta charset="UTF-8">
 </head>
 <body>
+<h3>게시판</h3>
+<hr>
 <table class="table table-striped table-hover fixed">
 	<colgroup>
 		<col style="width:10%;"/>
@@ -64,10 +67,35 @@
 			</td>
 			<td>
 				<div class="flow">
-					<a href="javascript:go_view(<%=b.getWrite_num() %>)" class="none"><%=b.getSubject() %></a>
+					<a href="javascript:go_view(<%=b.getWrite_num() %>)" class="none">
+	<%
+	for(int i = 0; i < b.getRelevel(); i++) {
+		out.print("-");
+	}
+	if(b.getRelevel() != 0) {
+		out.print(">");
+	}
+	%>
+					<%=b.getSubject() %>
+	<%
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+	Calendar cal = Calendar.getInstance();
+	long today = Long.parseLong(sdf.format(cal.getTime()));
+	long w_day = Long.parseLong(sdf.format(b.getWrite_date()));
+	if((today - w_day) < 10000) {
+		out.print(" [new]");
+	}
+	%>
+					</a>
 				</div>
 			</td>
-			<td><%=b.getWrite_date() %></td>
+			<td>
+	<%
+	sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	String w_date = sdf.format(b.getWrite_date());
+	%>
+				<%=w_date %>
+			</td>
 			<td><%=b.getViewcnt() %></td>
 		</tr>
 	<%

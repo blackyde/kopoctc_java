@@ -1,7 +1,6 @@
 package com.board.dto;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 public class Board {
 
@@ -43,9 +42,8 @@ public class Board {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getWrite_date() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");		
-		return sdf.format(write_date);
+	public Timestamp getWrite_date() {
+		return write_date;
 	}
 	public void setWrite_date(Timestamp write_date) {
 		this.write_date = write_date;

@@ -15,6 +15,10 @@
 	int rootid = Integer.parseInt(rootids);
 	int relevel = Integer.parseInt(relevels);
 	int recnt = Integer.parseInt(recnts);
+	subject = subject.replaceAll(";", "&#59;");
+	subject = subject.replaceAll("'", "&#39;");
+	contents = contents.replaceAll(";", "&#59;");
+	contents = contents.replaceAll("'", "&#39;");
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board(subject, contents, rootid, relevel);
 	b.setRecnt(recnt);

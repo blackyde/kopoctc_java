@@ -6,13 +6,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
+<h3>글쓰기</h3>
+<hr>
 <form method="post" action="/ReBoard/" name="inputForm" onsubmit="return checkAll()">
 	<table class="table">
 		<tbody>
-			<tr>
-				<th>번호</th>
-				<td>신규(insert)</td>
-			<tr>
 			<tr>
 				<th>제목</th>
 				<td>
@@ -39,10 +37,6 @@
 					});
 					</script>
 				</td>
-			</tr>
-			<tr>
-				<th>일자</th>
-				<td></td>
 			</tr>
 			<tr>
 				<th>내용</th>

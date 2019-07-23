@@ -3,13 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+    /*$(document).ready( function() {
+  
+        $("input[type=file]").change(function () {
+              
+            var fileInput = document.getElementById("files");
+              
+            var files = fileInput.files;
+            var file;
+              
+            for (var i = 0; i < files.length; i++) {
+                  
+                file = files[i];
+                
+                var fileinput = "file" + (i + 1);
+                document.getElementById(fileinput).value = file.name;
+                
+            }
+              
+        });
+  
+    });*/
+       
+</script>
 </head>
 <body>
 	<form action="upload.jsp" method="post" enctype="multipart/form-data">
 		아이디 : <input type="text" name="id"><br>
 		제목 : <input type="text" name="subject"><br>
-		파일첨부1 : <input type="file" name="file1"><br>
-		파일첨부2 : <input type="file" name="file2"><br>
+		파일첨부1 : <input type="file" name="file1" id="file1"><br>
+		파일첨부2 : <input type="file" name="file2" id="file2"><br>
 		<input type="submit" value="확인">
 	</form>
 </body>
