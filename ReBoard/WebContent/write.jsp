@@ -8,7 +8,7 @@
 <body>
 <h3>글쓰기</h3>
 <hr>
-<form method="post" action="/ReBoard/" name="inputForm" onsubmit="return checkAll()">
+<form method="post" action="/ReBoard/?contentPage=writeDB.jsp" name="inputForm" onsubmit="return checkAll()" enctype="multipart/form-data">
 	<table class="table">
 		<tbody>
 			<tr>
@@ -63,6 +63,12 @@
 		
 					});
 					</script>
+				</td>
+			</tr>
+			<tr>
+				<th>파일</th>
+				<td>
+					<input type="file" name="file" id="file" multiple />
 				</td>
 			</tr>
 			<tr>

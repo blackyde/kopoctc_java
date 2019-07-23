@@ -1,6 +1,7 @@
 package com.board.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Board {
 
@@ -12,6 +13,7 @@ public class Board {
 	private int relevel;
 	private int recnt;
 	private int viewcnt;
+	private List<String> file;
 	
 	public Board() {
 		
@@ -81,5 +83,13 @@ public class Board {
 
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
+	}
+
+	public List<String> getFile() {
+		return file;
+	}
+
+	public void setFile(List<String> file) {
+		this.file = file;
 	}
 }

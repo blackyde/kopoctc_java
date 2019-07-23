@@ -1,13 +1,36 @@
+<%@page import="org.apache.commons.fileupload.MultipartStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
-<%@ page import="java.io.File"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
-<%@ page import="java.util.List"%>
 <%@ page import="org.apache.commons.fileupload.FileItem"%>
-<%@ page import="java.util.Iterator"%>
-<%@ page import="java.io.IOException"%>
+<%!
+public class Param {
+	private String parameter;
+	private String value;
+	
+	public Param(String parameter, String value) {
+		this.parameter = parameter;
+		this.value = value;
+	}
+	
+	public String getParameter() {
+		return parameter;
+	}
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
+	}
+	
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,21 +53,18 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 	List<FileItem> items = upload.parseRequest(request); //실제 업로드 부분(이부분에서 파일이 생성된다)
 
 	Iterator<FileItem> iter = items.iterator(); //Iterator 사용
+	List<Param> param = new ArrayList<Param>();
 	while (iter.hasNext()) {
 		FileItem fileItem = (FileItem) iter.next(); //파일을 가져온다
-
-		if (fileItem.isFormField()) { //업로드도니 파일이 text형태인지 다른 형태인지 체크
-										// text형태면 if문에 걸림
-			out.println("폼 파라미터: " + fileItem.getFieldName() + "=" + fileItem.getString("utf-8") + "<br>");
+		if (fileItem.isFormField()) { //일반 파라미터
+			String parameter = fileItem.getFieldName();
+			String value = fileItem.getString();
+			Param p = new Param(parameter, value);
+			param.add(p);
 		} else { //파일이면 이부분의 루틴을 탄다
 			if (fileItem.getSize() > 0) { //파일이 업로드 되었나 안되었나 체크 size>0이면 업로드 성공
 				String fieldName = fileItem.getFieldName();
 				String fileName = fileItem.getName();
-				File uploadedFile = new File(realDir, fileName);
-				while(uploadedFile.exists()) {
-					fileName = "_" + fileName;
-					uploadedFile = new File(realDir, fileName);
-				}
 				String contentType = fileItem.getContentType();
 				boolean isInMemory = fileItem.isInMemory();
 				long sizeInBytes = fileItem.getSize();
@@ -56,10 +76,11 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 				out.println("<br>");
 
 				try {
-					uploadedFile = new File(realDir, fileName); //실제 디렉토리에 fileName으로 카피 된다.
-					//if(uploadedFile.exists()) {
-					//	uploadedFile = new File(realDir, "복사본_" + fileName);
-					//}
+					File uploadedFile = new File(realDir, fileName); //실제 디렉토리에 fileName으로 카피 된다.
+					if(uploadedFile.exists()) {
+						UUID uid = UUID.randomUUID();
+						uploadedFile = new File(realDir, uid + fileName);
+					}
 					fileItem.write(uploadedFile);
 					fileItem.delete(); //카피 완료후 temp폴더의 temp파일을 제거
 				} catch (IOException ex) {
@@ -67,6 +88,10 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 				}
 			}
 		}
+	}
+	
+	for(Param p : param) {
+		out.print("parametername : " + p.getParameter() + "<br>" + "value : " + p.getValue() + "<br>");
 	}
 } else {
 	out.println("인코딩 타입이 multipart/form-data 가 아님.");

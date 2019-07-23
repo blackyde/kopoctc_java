@@ -22,12 +22,25 @@ public class BoardDaoImpl implements BoardDao<Board> {
 				+ "'%s', '%s', %d, %d)",
 				b.getSubject(),
 				b.getContents(), 0, 0);
+		if(b.getFile().size() > 0) {
+			String file = b.getFile().get(0);
+			for(int i = 1; i < b.getFile().size(); i++) {
+				file += "," + b.getFile().get(i);
+			}
+			sql = String.format("INSERT INTO board (`subject`,"
+					+ "`contents`, `relevel`, `recnt`, `file`) VALUES ("
+					+ "'%s', '%s', %d, %d, '%s')",
+					b.getSubject(),
+					b.getContents(), 0, 0, file);
+		}
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		
 		sql = String.format("UPDATE board SET `rootid` = `write_num` WHERE `relevel` = 0");
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
+		
+		
 		
 		b = selectOne(b);
 		return b;
