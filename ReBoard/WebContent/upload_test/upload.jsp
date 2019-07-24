@@ -58,7 +58,7 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 		FileItem fileItem = (FileItem) iter.next(); //파일을 가져온다
 		if (fileItem.isFormField()) { //일반 파라미터
 			String parameter = fileItem.getFieldName();
-			String value = fileItem.getString();
+			String value = fileItem.getString("utf-8");
 			Param p = new Param(parameter, value);
 			param.add(p);
 		} else { //파일이면 이부분의 루틴을 탄다
@@ -93,6 +93,9 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 	for(Param p : param) {
 		out.print("parametername : " + p.getParameter() + "<br>" + "value : " + p.getValue() + "<br>");
 	}
+%>
+<input type="file" name="name" value="딸기.jpg"/>
+<%
 } else {
 	out.println("인코딩 타입이 multipart/form-data 가 아님.");
 }

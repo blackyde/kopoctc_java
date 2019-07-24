@@ -7,31 +7,6 @@
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.FileItem"%>
-<%!
-public class Param {
-	private String parameter;
-	private String value;
-	
-	public Param(String parameter, String value) {
-		this.parameter = parameter;
-		this.value = value;
-	}
-	
-	public String getParameter() {
-		return parameter;
-	}
-	public void setParameter(String parameter) {
-		this.parameter = parameter;
-	}
-	
-	public String getValue() {
-		return value;
-	}
-	public void setValue(String value) {
-		this.value = value;
-	}
-}
-%>
 <%
 boolean isMultipart = ServletFileUpload.isMultipartContent(request); // multipart로 전송되었는가를 체크
 if (isMultipart) { // multipart로 전송 되었을 경우
@@ -47,7 +22,7 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 	List<FileItem> items = upload.parseRequest(request); //실제 업로드 부분(이부분에서 파일이 생성된다)
 
 	Iterator<FileItem> iter = items.iterator(); //Iterator 사용
-	List<Param> param = new ArrayList<Param>();
+	Map<String, String> param = new HashMap<String, String>();
 	List<String> files = new ArrayList<String>();
 	while (iter.hasNext()) {
 		FileItem fileItem = (FileItem) iter.next(); //파일을 가져온다
@@ -58,8 +33,7 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 			parameter = parameter.replaceAll("'", "&#39;");
 			value = value.replaceAll(";", "&#59;");
 			value = value.replaceAll("'", "&#39;");
-			Param p = new Param(parameter, value);
-			param.add(p);
+			param.put(parameter, value);
 		} else { //파일이면 이부분의 루틴을 탄다
 			if (fileItem.getSize() > 0) { //파일이 업로드 되었나 안되었나 체크 size>0이면 업로드 성공
 				String fieldName = fileItem.getFieldName();
@@ -80,10 +54,6 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 
 				try {
 					uploadedFile = new File(realDir, fileName); //실제 디렉토리에 fileName으로 카피 된다.
-					if(uploadedFile.exists()) {
-						UUID uid = UUID.randomUUID();
-						uploadedFile = new File(realDir, uid + fileName);
-					}
 					fileItem.write(uploadedFile);
 					fileItem.delete(); //카피 완료후 temp폴더의 temp파일을 제거
 				} catch (IOException ex) {
@@ -94,8 +64,8 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 	}
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board();
-	b.setSubject(param.get(0).getValue());
-	b.setContents(param.get(1).getValue());
+	b.setSubject(param.get("subject"));
+	b.setContents(param.get("contents"));
 	b.setFile(files);
 	bb.insert(b);
 } else {

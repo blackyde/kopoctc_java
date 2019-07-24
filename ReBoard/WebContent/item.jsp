@@ -55,7 +55,23 @@
 		<tr>
 			<th>내용</th>
 			<td>				
-				<%=b.getContents() %>
+				<div style="height: 300px; overflow-y: scroll;">
+					<%=b.getContents() %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>파일</th>
+			<td>				
+<%
+	if(b.getFile() != null && b.getFile().size() > 0) {
+		for(String s : b.getFile()) {
+%>
+				<a href="download.jsp?fileName=<%=s %>" class="none"><%=s %></a><br>
+<%
+		}
+	}	
+%>
 			</td>
 		</tr>
 		<tr>

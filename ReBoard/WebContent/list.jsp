@@ -76,7 +76,6 @@
 		out.print(">");
 	}
 	%>
-					<%=b.getSubject() %>
 	<%
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 	Calendar cal = Calendar.getInstance();
@@ -86,6 +85,7 @@
 		out.print(" [new]");
 	}
 	%>
+					<%=b.getSubject() %>
 					</a>
 				</div>
 			</td>

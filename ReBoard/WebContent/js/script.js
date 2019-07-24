@@ -46,3 +46,22 @@ function go_view(write_num){
     document.wform.submit();
 
 }
+function go_list(){
+    
+    document.wform.contentPage.value = "list.jsp";
+    document.wform.action = "/ReBoard/";
+    document.wform.submit();
+
+}
+function boxcheck(num) {
+	for(i = 0; i < num; i++) {
+		var files = "file" + i;
+		var checks = "check" + i;
+		if($("input:checkbox[id=" + files + "]").is(":checked") == false) {
+			$("input:checkbox[id=" + checks + "]").prop("checked", false);
+		} else {
+			$("input:checkbox[id=" + checks + "]").prop("checked", true);
+		}
+	}
+	
+}

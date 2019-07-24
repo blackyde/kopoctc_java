@@ -20,6 +20,7 @@
 %>
 <h3>답글 달기</h3>
 <hr>
+<form method="post" action="/ReBoard/?contentPage=replyDB.jsp" class="inline" name="updateForm" onsubmit="return checkUpdate()" enctype="multipart/form-data">
 <table class="table">
 	<tbody>
 		<tr>
@@ -77,21 +78,24 @@
 			</td>
 		</tr>
 		<tr>
+			<th>파일</th>
+			<td>
+				<input type="file" name="file" id="file" multiple />
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2" class="right">
-				<form method="post" action="/ReBoard/" class="inline">
-					<input type="hidden" name="contentPage" value="list.jsp">
-					<input type="submit" value="취소">
-				</form>
-				<form method="post" action="/ReBoard/" class="inline" name="updateForm" onsubmit="return checkUpdate()">
-					<input type="hidden" id="subjectFinal" name="subjectFinal" value="<%=b.getSubject()%>">
-					<input type="hidden" id="contentsFinal" name="contentsFinal" value="<%=b.getContents()%>">
-					<input type="hidden" id="rootid" name="rootid" value="<%=b.getRootid()%>">
-					<input type="hidden" id="recnt" name="recnt" value="<%=b.getRecnt() + 1%>">
-					<input type="hidden" id="relevel" name="relevel" value="<%=b.getRelevel() + 1%>">
-					<input type="hidden" name="contentPage" value="replyDB.jsp">
-					<input type="submit" value="쓰기">
-				</form>
+				<input type="button" value="취소" onclick="javascript:go_list()">
+				<input type="hidden" id="rootid" name="rootid" value="<%=b.getRootid()%>">
+				<input type="hidden" id="recnt" name="recnt" value="<%=b.getRecnt() + 1%>">
+				<input type="hidden" id="relevel" name="relevel" value="<%=b.getRelevel() + 1%>">
+				<input type="hidden" name="contentPage" value="replyDB.jsp">
+				<input type="submit" value="쓰기">
 			</td>
 		</tr>
 	</tbody>
 </table>
+</form>
+<form name="wform" method="post">
+	<input type="hidden" name="contentPage">
+</form>

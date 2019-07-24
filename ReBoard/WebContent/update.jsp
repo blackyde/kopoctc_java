@@ -20,11 +20,12 @@
 %>
 <h3>글 수정</h3>
 <hr>
+<form method="post" action="/ReBoard/?contentPage=updateDB.jsp" class="inline" name="updateForm" onsubmit="return checkUpdate()" enctype="multipart/form-data">
 <table class="table">
 	<tbody>
 		<tr>
 			<th>번호</th>
-			<td><%=b.getWrite_num() %></td>
+			<td><input type="text" name="write_num" value="<%=b.getWrite_num()%>" readonly></td>
 		<tr>
 		<tr>
 			<th>제목</th>
@@ -85,24 +86,38 @@
 			</td>
 		</tr>
 		<tr>
+			<th>파일</th>
+			<td>
+<%
+	int check = 0;
+	if(b.getFile() != null && b.getFile().size() > 0) {
+		for(String s : b.getFile()) {
+			
+%>
+				<%=s %>
+				<input type="checkbox" id="file<%=check%>" name="file<%=check%>">
+				파일을 삭제하려면 체크해 주세요.
+				<br>
+<%
+			check++;
+		}
+%>
+<%
+	}	
+%>
+				<input type="hidden" id="totalFile" name="totalFile" value="<%=check %>">
+				<input type="file" name="file" id="file" multiple />
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2" class="right">
-				<form method="post" action="/ReBoard/" class="inline">
-					<input type="hidden" name="contentPage" value="list.jsp">
-					<input type="submit" value="취소">
-				</form>
-				<form method="post" action="/ReBoard/" class="inline" name="updateForm" onsubmit="return checkUpdate()">
-					<input type="hidden" name="write_num" value="<%=b.getWrite_num()%>">
-					<input type="hidden" id="subjectFinal" name="subjectFinal" value="<%=b.getSubject()%>">
-					<input type="hidden" id="contentsFinal" name="contentsFinal" value="<%=b.getContents()%>">
-					<input type="hidden" name="contentPage" value="updateDB.jsp">
-					<input type="submit" value="쓰기">
-				</form>
-				<form method="post" action="/ReBoard/" class="inline" name="deleteForm" onsubmit="return checkDelete()">
-					<input type="hidden" name="contentPage" value="delete.jsp">
-					<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
-					<input type="submit" value="삭제">
-				</form>
+				<input type="button" value="취소" onclick="javascript:go_list()">
+				<input type="submit" value="수정하기">
 			</td>
 		</tr>
 	</tbody>
 </table>
+</form>
+<form name="wform" method="post">
+	<input type="hidden" name="contentPage">
+</form>

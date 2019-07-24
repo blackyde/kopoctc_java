@@ -25,7 +25,7 @@ public class BoardDaoImpl implements BoardDao<Board> {
 		if(b.getFile().size() > 0) {
 			String file = b.getFile().get(0);
 			for(int i = 1; i < b.getFile().size(); i++) {
-				file += "," + b.getFile().get(i);
+				file += "|" + b.getFile().get(i);
 			}
 			sql = String.format("INSERT INTO board (`subject`,"
 					+ "`contents`, `relevel`, `recnt`, `file`) VALUES ("
@@ -57,6 +57,22 @@ public class BoardDaoImpl implements BoardDao<Board> {
 				b.getRootid(),
 				b.getRelevel(),
 				b.getRecnt());
+		if(b.getFile().size() > 0) {
+			String file = b.getFile().get(0);
+			for(int i = 1; i < b.getFile().size(); i++) {
+				file += "|" + b.getFile().get(i);
+			}
+			sql = String.format("INSERT INTO board (`subject`,"
+					+ "`contents`, `rootid`, `relevel`, `recnt`, `file`"
+					+ ") VALUES ("
+					+ "'%s', '%s', %d, %d, %d, '%s')",
+					b.getSubject(),
+					b.getContents(),
+					b.getRootid(),
+					b.getRelevel(),
+					b.getRecnt(),
+					file);
+		}
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		
@@ -71,7 +87,7 @@ public class BoardDaoImpl implements BoardDao<Board> {
 				+ "ORDER BY write_num DESC");
 		pstmt = CONN.prepareStatement(sql);
 		rs = pstmt.executeQuery();		
-		lb = new ArrayList<Board>();
+		lb = new ArrayList<Board>();		
 		
 		while(rs.next()) {
 			b = new Board();
@@ -83,6 +99,14 @@ public class BoardDaoImpl implements BoardDao<Board> {
 			b.setRelevel(rs.getInt(6));
 			b.setRecnt(rs.getInt(7));
 			b.setViewcnt(rs.getInt(8));
+			if(rs.getString(9) != null) {
+				List<String> file = new ArrayList<String>();
+				String[] splitfile = rs.getString(9).split("\\|");
+				for(int i = 0; i < splitfile.length; i++) {
+					file.add(splitfile[i]);
+				}
+				b.setFile(file);
+			}			
 			lb.add(b);
 		}
 		
@@ -111,6 +135,14 @@ public class BoardDaoImpl implements BoardDao<Board> {
 			b.setRelevel(rs.getInt(6));
 			b.setRecnt(rs.getInt(7));
 			b.setViewcnt(rs.getInt(8));
+			if(rs.getString(9) != null) {
+				List<String> file = new ArrayList<String>();
+				String[] splitfile = rs.getString(9).split("\\|");
+				for(int i = 0; i < splitfile.length; i++) {
+					file.add(splitfile[i]);
+				}
+				b.setFile(file);
+			}			
 			lb.add(b);
 		}
 		
@@ -136,6 +168,14 @@ public class BoardDaoImpl implements BoardDao<Board> {
 			b.setRelevel(rs.getInt(6));
 			b.setRecnt(rs.getInt(7));
 			b.setViewcnt(rs.getInt(8));
+			if(rs.getString(9) != null) {
+				List<String> file = new ArrayList<String>();
+				String[] splitfile = rs.getString(9).split("\\|");
+				for(int i = 0; i < splitfile.length; i++) {
+					file.add(splitfile[i]);
+				}
+				b.setFile(file);
+			}			
 		}
 		
 		return b;
@@ -146,11 +186,27 @@ public class BoardDaoImpl implements BoardDao<Board> {
 		// TODO Auto-generated method stub
 		String sql = String.format("UPDATE board SET "
 				+ "`subject` = '%s', "
-				+ "`contents` = '%s' "
+				+ "`contents` = '%s', "
+				+ "`file` = null "
 				+ "WHERE `write_num` = %d",
 				b.getSubject(),
 				b.getContents(),
 				b.getWrite_num());
+		if(b.getFile().size() > 0) {
+			String file = b.getFile().get(0);
+			for(int i = 1; i < b.getFile().size(); i++) {
+				file += "|" + b.getFile().get(i);
+			}
+			sql = String.format("UPDATE board SET "
+					+ "`subject` = '%s', "
+					+ "`contents` = '%s', "
+					+ "`file` = '%s' "
+					+ "WHERE `write_num` = %d",
+					b.getSubject(),
+					b.getContents(),
+					file,
+					b.getWrite_num());
+		}
 		pstmt = CONN.prepareStatement(sql);
 		pstmt.executeUpdate();
 		b = selectOne(b);
