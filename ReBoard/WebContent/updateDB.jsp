@@ -30,9 +30,9 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 		if (fileItem.isFormField()) { //일반 파라미터
 			String parameter = fileItem.getFieldName();
 			String value = fileItem.getString("utf-8");
-			parameter = parameter.replaceAll(";", "&#59;");
-			parameter = parameter.replaceAll("'", "&#39;");
-			value = value.replaceAll(";", "&#59;");
+			if(!(value.contains("&lt;") || value.contains("&gt;"))) {
+				value = value.replaceAll(";", "&#59;");
+			}			
 			value = value.replaceAll("'", "&#39;");
 			param.put(parameter, value);
 		} else { //파일이면 이부분의 루틴을 탄다
@@ -88,7 +88,7 @@ if (isMultipart) { // multipart로 전송 되었을 경우
 	
 	b = bb.selectOne(b);
 } else {
-	out.println("인코딩 타입이 multipart/form-data 가 아님.");
+	response.sendRedirect("/ReBoard/");
 }
 %>
 <form method="post" action="/ReBoard/" name="fr">

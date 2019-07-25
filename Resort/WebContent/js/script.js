@@ -1,6 +1,6 @@
 var replaceId = /[<>!;/']/gi;
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$('#contents').summernote({
 		height: 300,                 // set editor height
 		minHeight: null,             // set minimum height of editor
@@ -19,7 +19,7 @@ $(document).ready(function() {
 	}).on("keyup", function() {
 		$(this).val($(this).val().replace(replaceId, ""));
 	});
-});
+});*/
 function checkAll() {
 	var fr = document.forms["inputForm"];
 	if(fr["subject"].value.length < 1 || fr["subject"].value.trim().length < 1) {

@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "com.board.dto.*" %>
 <%@ page import = "com.board.dao.*" %>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 
-	String write_nums = request.getParameter("write_num");
-	if(write_nums == null) {
-		response.sendRedirect("/ReBoard/");
-	}
+String write_nums = request.getParameter("write_num");
+if(write_nums == null) {
+	response.sendRedirect("/ReBoard/");
+} else {
 	int write_num = Integer.parseInt(write_nums);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	BoardDao<Board> bb = new BoardDaoImpl();
 	Board b = new Board();
@@ -20,7 +22,6 @@
 	if(b.getRootid() == 0) {
 		b.setRootid(b.getWrite_num());
 	}
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@
 		</tr>
 		<tr>
 			<th>일자</th>
-			<td><%=b.getWrite_date() %></td>
+			<td><%=sdf.format(b.getWrite_date()) %></td>
 		</tr>
 		<tr>
 			<th>조회수</th>
@@ -67,10 +68,14 @@
 	if(b.getFile() != null && b.getFile().size() > 0) {
 		for(String s : b.getFile()) {
 %>
-				<a href="download.jsp?fileName=<%=s %>" class="none"><%=s %></a><br>
+				<a href="upload/<%=s %>" class="none" download><%=s %></a><br>
 <%
 		}
-	}	
+	} else {
+%>
+				첨부 파일이 없습니다.
+<%
+	}
 %>
 			</td>
 		</tr>
@@ -113,3 +118,6 @@
 </table>
 </body>
 </html>
+<%
+}
+%>

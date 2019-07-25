@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+.inline {
+	display: inline;
+}
+.invi {
+	position: absolute;
+	margin-top: -3px;
+	width: 98%;
+	cursor: pointer;
+	opacity: 0;
+}
+.fixed {
+	table-layout: fixed;
+}
+.flow {
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+a.none {
+	text-decoration: none !important;
+}
+.dokdo {
+	font-family: 'East Sea Dokdo', cursive;
+}
+.noto {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.Charmander {
+	background-image: url('../image/Charmander.png');
+	background-size: 30%;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}

@@ -114,13 +114,16 @@ public class BoardDaoImpl implements BoardDao<Board> {
 	}
 	
 	@Override
-	public List<Board> selectDesc() throws SQLException {
+	public List<Board> selectList(int start, int row) throws SQLException {
 		// TODO Auto-generated method stub
 		String sql = String.format("SELECT * FROM board"
 				+ " ORDER BY rootid DESC, "
 				+ "recnt ASC, "
 				+ "relevel ASC, "
-				+ "write_num DESC");
+				+ "write_num DESC "
+				+ "LIMIT %d, %d",
+				start,
+				row);
 		pstmt = CONN.prepareStatement(sql);
 		rs = pstmt.executeQuery();		
 		lb = new ArrayList<Board>();

@@ -13,7 +13,7 @@ public interface BoardDao<B> {
 	
 	//R
 	List<B> select() throws SQLException;
-	List<Board> selectDesc() throws SQLException;
+	List<Board> selectList(int start, int total) throws SQLException;
 	B selectOne(B b) throws SQLException;
 	
 	//U

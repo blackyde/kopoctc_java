@@ -23,6 +23,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script>
+if (self.name != 'reload') {
+    self.name = 'reload';
+    self.location.reload(true);
+} else self.name = '';
+</script>
 </head>
 <body>
 <h3>게시판</h3>
@@ -30,7 +36,7 @@
 <table class="table table-striped table-hover fixed">
 	<colgroup>
 		<col style="width:10%;"/>
-		<col style="width:50%;"/>
+		<col style="width:60%;"/>
 		<col style="width:20%;"/>
 		<col width="*"/>
 	</colgroup>
@@ -46,20 +52,12 @@
 	<%
 	BoardDao<Board> bb = new BoardDaoImpl();
 	
-	//Board insert = new Board();
-	//insert.setSubject("공지사항1");
-	//insert.setContents("내용은 없습니다");
-	//bb.insert(insert);
-	
-	List<Board> lb = bb.selectDesc();
-	int cnt = 0;
+	List<Board> lb = bb.select();
 	int row = 10;
 	int pages = 5;
 	int total = (int)Math.ceil(lb.size() / (double)row);
+	lb = bb.selectList(fromPt - 1, row);
 	for(Board b : lb) {
-		cnt++;
-		if(cnt < fromPt) continue;
-		if(cnt > fromPt + row - 1) break;
 	%>
 		<tr>
 			<td>
