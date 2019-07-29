@@ -1,10 +1,10 @@
-package com.board.dao;
+package com.reboard.dao;
 
 import java.sql.*;
 import java.util.*;
 
 import com.board.connector.Connector;
-import com.board.dto.Board;
+import com.reboard.dto.Board;
 
 public class BoardDaoImpl implements BoardDao<Board> {
 	

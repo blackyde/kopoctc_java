@@ -1,4 +1,4 @@
-package com.board.dto;
+package com.reboard.dto;
 
 import java.sql.Timestamp;
 import java.util.List;

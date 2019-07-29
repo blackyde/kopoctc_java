@@ -1,9 +1,9 @@
-package com.board.dao;
+package com.reboard.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.board.dto.Board;
+import com.reboard.dto.Board;
 
 public interface BoardDao<B> {
 	

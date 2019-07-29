@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.board.dto.*" %>
-<%@ page import = "com.board.dao.*" %>
+<%@ page import = "com.reboard.dto.*" %>
+<%@ page import = "com.reboard.dao.*" %>
 <%@ page import = "java.util.*" %>
 <%@ page import="java.io.*"%>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
