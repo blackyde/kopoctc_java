@@ -95,5 +95,4 @@ public class BookDaoImpl extends GenericDaoImpl<Book> implements BookDao {
 		rs = pstmt.executeQuery();
 		return rs;
 	}
-
 }
