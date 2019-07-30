@@ -16,8 +16,12 @@
 		startPage = "1";
 	}
 	int start = Integer.parseInt(startPage);
-
-	boolean isLogin = (boolean)session.getAttribute("isLogin");
+	
+	boolean isLogin = false;
+	Object obj = session.getAttribute("isLogin");
+	if(obj != null) {
+		isLogin = (boolean)session.getAttribute("isLogin");
+	}
 	
 %>
 <div class="row">
@@ -47,11 +51,6 @@
 			<tbody>
 			<%
 			BoardDao<Board> bb = new BoardDaoImpl();
-			
-			//Board insert = new Board();
-			//insert.setSubject("공지사항1");
-			//insert.setContents("내용은 없습니다");
-			//bb.insert(insert);
 			
 			List<Board> lb = bb.selectDesc();
 			int cnt = 0;

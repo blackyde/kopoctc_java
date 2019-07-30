@@ -1,16 +1,9 @@
-<%@ page import = "java.net.URLDecoder"%>
-<%@ page import = "java.net.URLEncoder"%>
-<%@ page import = "java.text.SimpleDateFormat"%>
-<%@ page import = "java.util.Calendar"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String contentPage = request.getParameter("contentPage");
-	if(contentPage == null) {
-		contentPage = "main.jsp";
-	}
-	
     // 마지막 방문일을 저장하고 있는 쿠키를 저장할 객체
     Cookie lastDate = null;
     
@@ -47,7 +40,7 @@
     // 처음 방문일 경우 새 쿠키 생성
     if (!isDate) {
         
-        msg = "처음 방문 입니다.";
+        msg = "처음 방문 입니다......";
     
         // 쿠키 객체를 생성
         lastDate = new Cookie("lastdate", dates);
@@ -62,7 +55,7 @@
     
     else {    // 이미 방문한 적이 있는 클라이언트라면
         
-        msg = "최근 접속일은 " + URLDecoder.decode(lastDate.getValue(), "UTF-8") + "입니다.";
+        msg = "당신의 마지막 방문 : " + URLDecoder.decode(lastDate.getValue(), "UTF-8");
         
         // 쿠키에 새 값을 추가
         lastDate.setValue(dates);
@@ -71,8 +64,12 @@
         response.addCookie(lastDate);
     }
 %>
-<jsp:include page="header.jsp" />
-<jsp:include page="<%=contentPage %>">
-	<jsp:param value="<%=msg %>" name="msg"/>
-</jsp:include>
-<jsp:include page="footer.jsp" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>마지막 방문 일을 출력하는 웹 페이지를 쿠키를 이용하여 작성하기</title>
+</head>
+<body>
+<h2><%= msg %></h2>
+</body>
+</html>

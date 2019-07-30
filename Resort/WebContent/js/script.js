@@ -105,6 +105,13 @@ function go_list(){
     document.wform.submit();
 
 }
+function go_boardlist(){
+    
+    document.wform.contentPage.value = "news/board/list.jsp";
+    document.wform.action = "/Resort/";
+    document.wform.submit();
+
+}
 function boxcheck(num) {
 	for(i = 0; i < num; i++) {
 		var files = "file" + i;
@@ -116,4 +123,12 @@ function boxcheck(num) {
 		}
 	}
 	
+}
+function logout() {
+	var logout = confirm("로그아웃 하시겠습니까?");
+	if(logout) {
+		document.wform.contentPage.value = "logout.jsp";
+	    document.wform.action = "/Resort/";
+	    document.wform.submit();
+	}
 }

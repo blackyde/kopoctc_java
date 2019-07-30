@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 	<footer id="footer">
 		<div class="row">
 			<div class="col-lg-12">
@@ -10,10 +12,10 @@
 				</p>
 				
 				<p>
-					Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>.
-					Icons from <a href="https://fontawesome.com/" rel="nofollow">Font
+					Based on <a href="https://getbootstrap.com" rel="nofollow" target="_new">Bootstrap</a>.
+					Icons from <a href="https://fontawesome.com/" rel="nofollow" target="_new">Font
 						Awesome</a>. Web fonts from <a href="https://fonts.google.com/"
-						rel="nofollow">Google</a>.
+						rel="nofollow" target="_new">Google</a>.
 				</p>
 
 			</div>

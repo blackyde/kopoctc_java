@@ -2,16 +2,9 @@
     pageEncoding="UTF-8"%>
 <%
 	boolean isLogin = false;
-	String str = "";
-	Object obj = session.getAttribute("login");
+	Object obj = session.getAttribute("isLogin");
 	if(obj != null) {
-		isLogin = (boolean)session.getAttribute("login");
-	}
-	
-	if(isLogin) {
-		session.setAttribute("isLogin", true);
-	} else {
-		session.setAttribute("isLogin", false);
+		isLogin = (boolean)session.getAttribute("isLogin");
 	}
 %>
 <!DOCTYPE html>
@@ -88,7 +81,7 @@
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						id="book">예약하기 <span class="caret"></span></a>
 						<div class="dropdown-menu" aria-labelledby="book">
-							<a class="dropdown-item" href="javascript:go('book/status.html');">예약상황</a>
+							<a class="dropdown-item" href="javascript:go('book/status.jsp');">예약상황</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="javascript:go('book/booking.html');">예약하기</a>
 						</div>
@@ -110,11 +103,13 @@
 %>
 					<li class="nav-item">
 						<a class="nav-link"
-						href="#" target="_blank">관리자 페이지</a>
+						href="#">관리자 페이지</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link"
-						href="#" target="_blank">로그아웃</a>
+						<a class="nav-link" href="javascript:logout();">로그아웃</a>
+						<form name="wform" method="post">
+							<input type="hidden" name="contentPage">
+						</form>
 					</li>
 <%
 	} else {

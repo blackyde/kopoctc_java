@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("UTF-8");
+String msg = request.getParameter("msg");
+%>
 <div class="row">
 	<div class="col-lg-12">
 		<ol class="breadcrumb">
@@ -84,5 +90,10 @@
 			<strong>흙수저룸</strong><br>
 			흙수저룸이 새단장을 마쳤습니다.
 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<h3><%=msg %></h3>
 	</div>
 </div>

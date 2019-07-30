@@ -42,7 +42,7 @@
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" name="subject" id="subject" value="<%=b.getSubject() %>" maxlength="50">
+						<input type="text" name="subject" id="subject" value="<%=b.getSubject() %>" maxlength="50" size="50">
 					</td>
 				</tr>
 				<tr>

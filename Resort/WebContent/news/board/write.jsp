@@ -21,7 +21,7 @@
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="subject" id="subject" maxlength="50">
+							<input type="text" name="subject" id="subject" maxlength="50" size="50">
 						</td>
 					</tr>
 					<tr>
@@ -36,7 +36,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" class="right">
-							<input type="reset" value="취소">
+							<input type="button" value="취소" onclick="javascript:go_boardlist()">
 							<input type="hidden" name="contentPage" value="news/board/writeDB.jsp">
 							<input type="submit" value="쓰기">
 						</td>
@@ -46,3 +46,6 @@
 		</form>
 	</div>
 </div>
+<form name="wform" method="post">
+	<input type="hidden" name="contentPage">
+</form>
