@@ -77,7 +77,10 @@
 							<a class="dropdown-item" href="javascript:go('travel/sea.html');">바다</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:go('book/status.jsp');">예약하기</a>
+					</li>
+					<!-- li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						id="book">예약하기 <span class="caret"></span></a>
 						<div class="dropdown-menu" aria-labelledby="book">
@@ -85,7 +88,7 @@
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="javascript:go('book/booking.html');">예약하기</a>
 						</div>
-					</li>
+					</li-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						id="news">펜션 소식 <span class="caret"></span></a>
