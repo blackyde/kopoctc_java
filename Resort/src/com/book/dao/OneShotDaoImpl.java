@@ -43,8 +43,9 @@ public class OneShotDaoImpl extends GenericDaoImpl<OneShot> implements OneShotDa
 	public List<OneShot> selectOneShot_override() throws SQLException {
 		// TODO Auto-generated method stub
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 1);
 		String month = cal.get(Calendar.YEAR) + String.format("%02d", cal.get(Calendar.MONTH) + 1);
-		String day = String.format("%d", cal.get(Calendar.DATE) + 1);
+		String day = String.format("%02d", cal.get(Calendar.DATE));
 		String sql = String.format("SELECT cal.dt, DAYOFWEEK(cal.dt) AS 'dow', " + 
 				"IFNULL((SELECT `name` FROM book WHERE room = 1 AND resv_date = cal.dt), '예약 가능') AS 'room1', " + 
 				"IFNULL((SELECT `name` FROM book WHERE room = 2 AND resv_date = cal.dt), '예약 가능') AS 'room2', " + 

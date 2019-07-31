@@ -21,7 +21,55 @@ $(document).ready(function() {
 		$(this).val($(this).val().replace(replaceId, ""));
 	});
 	
-	$("#contents").on("focusout", function() {
+	$("#name").on("focusout", function() {
+		var x = $(this).val();
+		if (x.length > 0) {
+			if (x.match(replaceId)) {
+				x = x.replace(replaceId, "");
+			}
+			$(this).val(x);
+		}
+	}).on("keyup", function() {
+		$(this).val($(this).val().replace(replaceId, ""));
+	});
+	
+	$("#addr").on("focusout", function() {
+		var x = $(this).val();
+		if (x.length > 0) {
+			if (x.match(replaceId)) {
+				x = x.replace(replaceId, "");
+			}
+			$(this).val(x);
+		}
+	}).on("keyup", function() {
+		$(this).val($(this).val().replace(replaceId, ""));
+	});
+	
+	$("#telnum").on("focusout", function() {
+		var x = $(this).val();
+		if (x.length > 0) {
+			if (x.match(replaceId)) {
+				x = x.replace(replaceId, "");
+			}
+			$(this).val(x);
+		}
+	}).on("keyup", function() {
+		$(this).val($(this).val().replace(replaceId, ""));
+	});
+	
+	$("#in_name").on("focusout", function() {
+		var x = $(this).val();
+		if (x.length > 0) {
+			if (x.match(replaceId)) {
+				x = x.replace(replaceId, "");
+			}
+			$(this).val(x);
+		}
+	}).on("keyup", function() {
+		$(this).val($(this).val().replace(replaceId, ""));
+	});
+	
+	$("#comment").on("focusout", function() {
 		var x = $(this).val();
 		if (x.length > 0) {
 			if (x.match(replaceId)) {
@@ -60,6 +108,23 @@ function checkAll() {
 		fr["contents"].focus();
 		return false;
 	}
+	return true;
+}
+function book_check() {
+	var fr = document.forms["inputForm"];
+	if(fr["name"].value.length < 1 || fr["name"].value.trim().length < 1) {
+		fr["name"].focus();
+		return false;
+	}
+	if(fr["telnum"].value.length < 1 || fr["telnum"].value.trim().length < 1) {
+		fr["telnum"].focus();
+		return false;
+	}
+	if(fr["telnum"].value.length < 1 || fr["telnum"].value.trim().length < 1) {
+		fr["telnum"].focus();
+		return false;
+	}
+	
 	return true;
 }
 function checkUpdate() {

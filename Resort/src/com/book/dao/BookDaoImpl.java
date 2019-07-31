@@ -20,8 +20,7 @@ public class BookDaoImpl extends GenericDaoImpl<Book> implements BookDao {
 				+ "'%s', '%s', %d, '%s', '%s', '%s', '%s')", 
 				b.getName(), b.getResv_date(), b.getRoom(), b.getAddr(), 
 				b.getTelnum(), b.getIn_name(), b.getComment(), b.getProcessing());
-		exUpdate(sql);		
-		b = selectOne(b);
+		exUpdate(sql);
 		return b;
 	}
 	
@@ -59,11 +58,19 @@ public class BookDaoImpl extends GenericDaoImpl<Book> implements BookDao {
 	@Override
 	public Book selectOne_override(Book b) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql = String.format("");
+		String sql = String.format("SELECT `name`, `resv_date`, `room`, `addr`, "
+				+ "`telnum`, `in_name`, `comment`, `write_date`, `processing` FROM "
+				+ "book WHERE `room` = %d AND `resv_date` = '%s'", b.getRoom(), b.getResv_date());
 		rs = exQuery(sql);
 		if(rs != null) {
 			while(rs.next()) {
-				
+				b.setName(rs.getString("name"));
+				b.setResv_date(rs.getTimestamp("resv_date"));
+				b.setRoom(rs.getInt("room"));
+				b.setAddr(rs.getString("addr"));
+				b.setTelnum(rs.getString("telnum"));
+				b.setIn_name(rs.getString("in_name"));
+				b.setComment(rs.getString("comment"));
 			}
 		}		
 		return b;
