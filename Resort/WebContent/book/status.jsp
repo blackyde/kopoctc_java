@@ -20,6 +20,7 @@ String[] dow = {"일", "월", "화", "수", "목", "금", "토"};
 <div class="row">
 	<div class="col-lg-12">
 		<table class="table table-hover">
+		
 			<colgroup>
 				<col width="20%" />
 				<col width="20%" />
