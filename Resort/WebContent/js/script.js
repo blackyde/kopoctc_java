@@ -81,9 +81,8 @@ $(document).ready(function() {
 		$(this).val($(this).val().replace(replaceId, ""));
 
 	});
-});
-$(document).ready(function () {
-    $('.bxslider').bxSlider({
+	
+	$('.bxslider').bxSlider({
         auto: true, // 자동으로 애니메이션 시작
         speed: 500,  // 애니메이션 속도
         pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
@@ -170,6 +169,9 @@ function go_list(){
     document.wform.submit();
 
 }
+function go_admin(){
+    document.wform.submit();
+}
 function go_boardlist(){
     
     document.wform.contentPage.value = "news/board/list.jsp";
@@ -195,5 +197,11 @@ function logout() {
 		document.wform.contentPage.value = "logout.jsp";
 	    document.wform.action = "/Resort/";
 	    document.wform.submit();
+	}
+}
+function admin_delete() {
+	var ans = confirm("삭제하시겠습니까?");
+	if(ans) {
+		document.wform.submit();
 	}
 }

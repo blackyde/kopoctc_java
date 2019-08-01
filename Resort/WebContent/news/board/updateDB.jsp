@@ -11,7 +11,11 @@
 	String subject = request.getParameter("subjectFinal");
 	String contents = request.getParameter("contentsFinal");
 	if(subject == null || contents == null) {
-		response.sendRedirect("/Resort/");
+%>
+<script>
+location.href="/Resort/";
+</script>
+<%
 	} else {
 	
 		int write_num = Integer.parseInt(write_nums);

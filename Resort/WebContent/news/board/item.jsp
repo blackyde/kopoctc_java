@@ -17,6 +17,12 @@
 	b.setWrite_num(write_num);
 	b = bb.selectOne(b);
 	
+	boolean isLogin = false;
+	Object obj = session.getAttribute("isLogin");
+	if(obj != null) {
+		isLogin = (boolean)session.getAttribute("isLogin");
+	}
+	
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -55,11 +61,17 @@
 							<input type="hidden" name="contentPage" value="news/board/list.jsp">
 							<input type="submit" value="목록">
 						</form>
+<%
+	if(isLogin) {
+%>
 						<form method="post" action="/Resort/" class="inline">
 							<input type="hidden" name="contentPage" value="news/board/update.jsp">
 							<input type="hidden" name="write_num" value="<%=b.getWrite_num() %>">
 							<input type="submit" value="수정">
 						</form>
+<%
+	}
+%>
 					</td>
 				</tr>
 			</tbody>

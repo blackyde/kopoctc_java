@@ -9,7 +9,11 @@
 <%
 	String write_nums = request.getParameter("write_num");
 	if(write_nums == null) {
-		response.sendRedirect("/Resort/");
+%>
+<script>
+location.href="/Resort/";
+</script>
+<%
 	} else {
 	
 		int write_num = Integer.parseInt(write_nums);

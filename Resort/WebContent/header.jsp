@@ -106,7 +106,7 @@
 %>
 					<li class="nav-item">
 						<a class="nav-link"
-						href="#">관리자 페이지</a>
+						href="javascript:go('admin/list.jsp');">관리자 페이지</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="javascript:logout();">로그아웃</a>

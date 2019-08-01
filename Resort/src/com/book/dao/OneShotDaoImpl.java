@@ -2,7 +2,6 @@ package com.book.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,7 +27,7 @@ public class OneShotDaoImpl extends GenericDaoImpl<OneShot> implements OneShotDa
 	}
 
 	@Override
-	public List<OneShot> select_override(Timestamp today) throws SQLException {
+	public List<OneShot> select_override() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

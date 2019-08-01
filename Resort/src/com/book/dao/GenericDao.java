@@ -9,8 +9,8 @@ public interface GenericDao<B> {
 	B insert_override(B b) throws SQLException;
 	
 	//R
-	List<B> select(Timestamp today);
-	List<B> select_override(Timestamp today) throws SQLException;
+	List<B> select();
+	List<B> select_override() throws SQLException;
 	B selectOne(B b);
 	B selectOne_override(B b) throws SQLException;
 	

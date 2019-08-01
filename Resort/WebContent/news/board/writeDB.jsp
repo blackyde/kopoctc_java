@@ -10,7 +10,11 @@
 	String subject = request.getParameter("subject");
 	String contents = request.getParameter("contents");
 	if(subject == null || contents == null) {
-		response.sendRedirect("/Resort/");
+%>
+<script>
+location.href="/Resort/";
+</script>
+<%
 	} else {
 	
 		BoardDao<Board> bb = new BoardDaoImpl();

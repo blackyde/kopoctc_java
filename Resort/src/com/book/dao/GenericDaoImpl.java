@@ -23,10 +23,10 @@ public abstract class GenericDaoImpl<B> implements GenericDao<B> {
 		
 	}
 	
-	public List<B> select(Timestamp today) {
+	public List<B> select() {
 
 		try {
-			list = select_override(today);
+			list = select_override();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
