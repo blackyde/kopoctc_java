@@ -52,12 +52,18 @@ for(OneShot os : list) {
 							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
 							<input type="hidden" name="room" value="1">
 							<input type="submit" value="<%=os.getRoom1() %>" class="status">
-						</form>						
+						</form>
 					
 <%
 	} else {
 %>
-						<span class="txtGreen"><%=os.getRoom1() %></span>
+						<form method="post" action="/Resort/" name="bookForm">
+							<input type="hidden" name="contentPage" value="book/view.jsp">
+							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
+							<input type="hidden" name="room" value="1">
+							<input type="hidden" name="password">
+							<input type="submit" value="<%=os.getRoom1() %>" class="statusGreen">
+						</form>
 <%
 	}
 %>
@@ -71,12 +77,18 @@ for(OneShot os : list) {
 							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
 							<input type="hidden" name="room" value="2">
 							<input type="submit" value="<%=os.getRoom2() %>" class="status">
-						</form>						
+						</form>
 					
 <%
 	} else {
 %>
-						<span class="txtGreen"><%=os.getRoom2() %></span>
+						<form method="post" action="/Resort/" name="bookForm">
+							<input type="hidden" name="contentPage" value="book/view.jsp">
+							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
+							<input type="hidden" name="room" value="2">
+							<input type="hidden" name="password">
+							<input type="submit" value="<%=os.getRoom2() %>" class="statusGreen">
+						</form>
 <%
 	}
 %>
@@ -90,12 +102,17 @@ for(OneShot os : list) {
 							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
 							<input type="hidden" name="room" value="3">
 							<input type="submit" value="<%=os.getRoom3() %>" class="status">
-						</form>						
+						</form>
 					
 <%
 	} else {
 %>
-						<span class="txtGreen"><%=os.getRoom3() %></span>
+						<form method="post" action="/Resort/" name="bookForm">
+							<input type="hidden" name="contentPage" value="book/view.jsp">
+							<input type="hidden" name="resv_date" value="<%=os.getDays()%>">
+							<input type="hidden" name="room" value="3">
+							<input type="submit" value="<%=os.getRoom3() %>" class="statusGreen">
+						</form>
 <%
 	}
 %>

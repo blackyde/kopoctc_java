@@ -153,6 +153,12 @@ input.status {
 	color: #DF691A;
 	padding: 0;
 }
+input.statusGreen {
+	background: none;
+	border: none;
+	color: #5cb85c;
+	padding: 0;
+}
 .txtGreen {
 	color: #5cb85c;
 }

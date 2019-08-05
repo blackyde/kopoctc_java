@@ -59,8 +59,8 @@
         // 쿠키를 추가
         response.addCookie(lastDate);
     }
-    
-    else {    // 이미 방문한 적이 있는 클라이언트라면
+	// 이미 방문한 적이 있는 클라이언트라면
+    else {
         
         msg = "최근 접속일은 " + URLDecoder.decode(lastDate.getValue(), "UTF-8") + "입니다.";
         

@@ -119,8 +119,10 @@ function book_check() {
 		fr["telnum"].focus();
 		return false;
 	}
-	if(fr["telnum"].value.length < 1 || fr["telnum"].value.trim().length < 1) {
-		fr["telnum"].focus();
+	if(fr["password"].value.length < 4 || fr["password"].value.trim().length > 4) {
+		alert("4자리 숫자로 입력해주세요");
+		fr["password"].value="";
+		fr["password"].focus();
 		return false;
 	}
 	
@@ -191,17 +193,47 @@ function boxcheck(num) {
 	}
 	
 }
+function login() {
+	if(document.loginForm.id.value.length < 1 || document.loginForm.id.value.trim().length < 1) {
+		alert("id를 입력해주세요.");
+		document.loginForm.id.focus();
+		return false;
+	}
+	if(document.loginForm.password.value.length < 8 || document.loginForm.password.value.trim().length < 8) {
+		alert("password는 8글자 이상입니다.");
+		document.loginForm.password.focus();
+		return false;
+	}
+	return true;
+}
 function logout() {
 	var logout = confirm("로그아웃 하시겠습니까?");
 	if(logout) {
-		document.wform.contentPage.value = "logout.jsp";
-	    document.wform.action = "/Resort/";
-	    document.wform.submit();
+	    document.outform.action = "logoutAction.do";
+	    document.outform.submit();
 	}
 }
 function admin_delete() {
 	var ans = confirm("삭제하시겠습니까?");
-	if(ans) {
-		document.wform.submit();
+	return ans;
+}
+function b_pass() {
+	var fr = document.forms["inputForm"];
+	
+	if(isNaN(fr["password"].value)) {
+		fr["password"].value="";
+		fr["password"].focus();
+		alert("4자리 숫자로 입력해주세요");
 	}
+	if(fr["password"].value.length > 4) {
+		fr["password"].value="";
+		fr["password"].focus();
+		alert("4자리 숫자로 입력해주세요");
+	}
+}
+function pass() {
+	var pass = prompt("비밀번호를 입력해주세요");
+	var fr = document.forms["bookForm"];
+	fr["password"].value = pass;
+	fr.submit();
 }

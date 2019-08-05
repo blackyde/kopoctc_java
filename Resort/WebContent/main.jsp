@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("UTF-8");
-String msg = request.getParameter("msg");
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -92,8 +91,15 @@ String msg = request.getParameter("msg");
 		</div>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-lg-12">
-		<h3><%=msg %></h3>
+		<div class="alert alert-dismissible alert-primary">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4 class="alert-heading">Welcome!</h4>
+			<p class="mb-0">
+				${param.msg}
+			</p>
+		</div>
 	</div>
 </div>

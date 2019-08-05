@@ -67,6 +67,11 @@ default :
 					<input type="text" class="form-control" id="comment" name="comment"
 					 placeholder="Enter comments" maxlength="200">
 				</div>
+				<div class="form-group">
+					<label for="comment">비밀번호</label>
+					<input type="text" class="form-control" id="password" name="password"
+					 placeholder="Enter password" maxlength="10" onkeyup="b_pass();">
+				</div>
 				<input type="hidden" name="contentPage" value="book/bookingDB.jsp">
 				<button type="submit" class="btn btn-primary">Submit</button>
 				<button type="button" class="btn btn-dark" onclick="javascript:history.back();">취소</button>

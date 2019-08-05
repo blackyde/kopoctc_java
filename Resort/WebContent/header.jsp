@@ -40,7 +40,7 @@
 <body>
 	<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
 		<div class="container">
-			<a href="/Resort/" class="navbar-brand dokdo" style="font-size: 30px !important;">파이리조트</a>
+			<a href="main.do" class="navbar-brand dokdo" style="font-size: 30px !important;">파이리조트</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -110,8 +110,7 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="javascript:logout();">로그아웃</a>
-						<form name="wform" method="post">
-							<input type="hidden" name="contentPage">
+						<form name="outform" method="post">
 						</form>
 					</li>
 <%
@@ -119,7 +118,7 @@
 %>
 					<li class="nav-item">
 						<a class="nav-link"
-						href="javascript:go('login.jsp');" target="_blank">관리자 로그인</a>
+						href="login.do" target="_self">관리자 로그인</a>
 					</li>
 <%
 	}

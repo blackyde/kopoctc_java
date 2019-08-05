@@ -89,24 +89,28 @@ for(Book b : list) {
 					<td><%=b.getName() %></td>
 					<td>
 						<%=process %>
-						<form method="post" action="/Resort/" name="wform" style="display: inline-block; float: right;">
-							<input type="hidden" name="resv_date" value="<%=b.getResv_date() %>">
-							<input type="hidden" name="room" value="<%=b.getRoom() %>">
 <%
 	if(b.getProcessing() == 3) {
 %>
+						<form method="post" action="/Resort/" name="wform" onsubmit="return admin_delete();" style="display: inline-block; float: right;">
+							<input type="hidden" name="resv_date" value="<%=b.getResv_date() %>">
+							<input type="hidden" name="room" value="<%=b.getRoom() %>">
 							<input type="hidden" name="contentPage" value="admin/delete.jsp">
-							<input type="button" value="삭제" onclick="admin_delete();">
+							<input type="submit" value="삭제">
+						</form>
 <%	
 	} else {
 %>
+						<form method="post" action="/Resort/" name="wform" style="display: inline-block; float: right;">
+							<input type="hidden" name="resv_date" value="<%=b.getResv_date() %>">
+							<input type="hidden" name="room" value="<%=b.getRoom() %>">
 							<input type="hidden" name="contentPage" value="admin/update.jsp">
 							<input type="submit" value="수정">
+						</form>
 <%
 	}
 %>
 							
-						</form>
 					</td>
 				</tr>
 <%

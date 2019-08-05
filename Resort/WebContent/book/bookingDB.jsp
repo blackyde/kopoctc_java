@@ -26,6 +26,7 @@ String addr = request.getParameter("addr");
 String telnum = request.getParameter("telnum");
 String in_name = request.getParameter("in_name");
 String comment = request.getParameter("comment");
+String password = request.getParameter("password");
 
 BookDao bd = new BookDaoImpl();
 Book b = new Book();
@@ -36,6 +37,7 @@ b.setAddr(addr);
 b.setTelnum(telnum);
 b.setIn_name(in_name);
 b.setComment(comment);
+b.setPassword(password);
 
 b = bd.insert(b);
 %>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+function fnTest(date) {
+	var $target = $("select[name='room']");
+	
+	$target.empty();
+	if(date == "") {
+		$target.append("<option value=''>선택</option>");
+		return;
+	}
+	
+	$.ajax({
+
+		url : "test.jsp",
+
+		type : "post", //get post둘중하나
+
+		data : {},
+
+		success : function(data) {
+			
+			var obj = JSON.parse(data);
+
+			var book = obj.book;
+
+			if(book.length == 0) {
+				$target.append("<option value=''>선택</option>");
+			} else {
+				$target.append("<option value=''>선택</option>");
+				for(var i = 0; i < book.length; i ++) {
+					if(book[i].resv_date == date) {						
+						$target.append("<option value='" + book[i].room + "'>" + book[i].room + "</option>");
+					}
+				};
+			}
+		},
+		error: function(xhr) {
+			console.log(xhr.responseText);
+			return;
+		}
+	});
+}
+</script>
+
+</head>
+<body>
+
+<select name="date" id="date" onchange="fnTest(this.value);">
+	<option value="">선택</option>
+	<option value="2019-08-05 00:00:00.0">2019-08-05</option>
+	<option value="2019-08-08 00:00:00.0">2019-08-08</option>
+</select>	
+<select name="room" id="room">
+	<option value="">선택</option>
+</select>
+<hr>
+
+
+<input type="button" value="확인" />
+
+<div></div>
+
+</body>
+
+</html>

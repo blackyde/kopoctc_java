@@ -12,6 +12,8 @@ public class Book {
 	private String comment;
 	private Timestamp write_date;
 	private int processing;
+	private String password;
+	
 	public String getName() {
 		return name;
 	}
@@ -66,4 +68,11 @@ public class Book {
 	public void setProcessing(int processing) {
 		this.processing = processing;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }
