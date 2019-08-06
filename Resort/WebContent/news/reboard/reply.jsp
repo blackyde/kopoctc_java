@@ -43,7 +43,7 @@ if(write_nums == null) {
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="contents" id="contents" cols="50" rows="10" maxlength="5000"><%=b.getContents() %></textarea>
+						<textarea name="contents" id="contents" cols="50" rows="10" maxlength="5000" class="summernote"><%=b.getContents() %></textarea>
 					</td>
 				</tr>
 				<tr>

@@ -67,7 +67,7 @@ public class Controller extends HttpServlet {
                 action = new LoginAction();
                 forward = action.execute(request, response);
             }
-            else if(command.equals("logoutAction.do")) // 로그인 처리
+            else if(command.equals("logoutAction.do")) // 로그아웃 처리
             {
                 action = new LogoutAction();
                 forward = action.execute(request, response);

@@ -71,7 +71,7 @@ if(write_nums == null) {
 			if(b.getFile() != null && b.getFile().size() > 0) {
 				for(String s : b.getFile()) {
 		%>
-						<a href="../../upload/<%=s %>" class="none" download><%=s %></a><br>
+						<a href="upload/<%=s %>" class="none" download><%=s %></a><br>
 		<%
 				}
 			} else {
