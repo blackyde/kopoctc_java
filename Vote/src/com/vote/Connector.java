@@ -12,9 +12,9 @@ public class Connector {
 			System.out.println("Driver 로드 실패");
 		}
 		final String USERNAME = "root";
-		final String PASSWORD = "dptmzbdpf";
-		final String ADDRESS = "localhost";
-		final String DB_NAME = "kopo08";
+		final String PASSWORD = "Dptmzbdpf12!@";
+		final String ADDRESS = "35.221.189.227";
+		final String DB_NAME = "jsp";
 		
 		Connection conn = null;
 		try {

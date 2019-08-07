@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 public class PieChartMainExample {
 	public static void main(String[] args) {
-	JFrame frame = new JFrame("형액형분포 그래프");
+	JFrame frame = new JFrame("혈액형분포 그래프");
 	frame.setLocation(400, 200);
 	frame.setPreferredSize(new Dimension(500, 350));
 	Container contentPane = frame.getContentPane();
