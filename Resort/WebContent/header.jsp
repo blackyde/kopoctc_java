@@ -91,7 +91,7 @@
 					</li-->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-						id="news">펜션 소식 <span class="caret"></span></a>
+						id="news">리조트 소식 <span class="caret"></span></a>
 						<div class="dropdown-menu" aria-labelledby="news">
 							<a class="dropdown-item" href="javascript:go('news/board/list.jsp');">리조트 소식</a>
 							<div class="dropdown-divider"></div>

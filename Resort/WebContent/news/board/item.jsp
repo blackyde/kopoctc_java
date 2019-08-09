@@ -52,7 +52,7 @@
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea cols="50" rows="10" readonly><%=b.getContents() %></textarea>
+						<textarea rows="10" readonly style="width: 100%;"><%=b.getContents() %></textarea>
 					</td>
 				</tr>
 				<tr>

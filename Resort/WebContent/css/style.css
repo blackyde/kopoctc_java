@@ -162,3 +162,11 @@ input.statusGreen {
 .txtGreen {
 	color: #5cb85c;
 }
+
+@media (max-width: 380px) {
+.table th, .table td {
+	padding-right: 2px !important;
+	padding-left: 2px !important;
+	border-right: 1px solid #000000;
+	}
+}

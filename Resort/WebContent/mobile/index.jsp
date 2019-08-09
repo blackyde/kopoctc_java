@@ -20,7 +20,7 @@ if(uAgent.indexOf(mobilePhones) != -1) {
 	orientationEvent = "resize"; //안드로이드는 resize로 들어온다.
 } else orientationEvent = "orientationchange"; //아이폰은 이렇게.
 window.addEventListener(orientationEvent, function() {
-	location.reload();
+	location.href = "#";
 }, false);
 
 var prevScreen = 0;
@@ -31,7 +31,7 @@ function prevShow() {
 
 //서브메뉴를 선택(하단 버튼을 누름)했을때 함수
 var muCnt = 5; //서브메뉴
-var scCnt = 10; //화면
+var scCnt = 11; //화면
 function fncShow(pos) {
 	var i = 0;
 
@@ -56,6 +56,21 @@ function fncShow(pos) {
 	}
 }
 
+var ScrObj;
+
+var timer1;
+
+function ScrAnimation() {
+	var offset = -50;
+	if(parseInt(ScrObj.style.left) > 10) {
+		ScrObj.style.left = parseInt(ScrObj.style.left) + offset + "px";
+		timer1 = setTimeout("ScrAnimation()", 1);
+	} else {
+		ScrObj.style.left = 5;
+		clearTimeout(timer1);
+	}
+}
+
 //총 화면은 15개이고 화면이 선택된 번호에 따라 화면을 보여주는 함수
 function ScreenShow(pos) {
 	var i = 0;
@@ -71,7 +86,16 @@ function ScreenShow(pos) {
 		var obj = document.getElementById("s" + i);
 
 		if(i == pos) {
+			prevScreen = sv_prevScreen;
+			sv_prevScreen = i;
 			obj.style.display = "";
+			obj.style.position = "relative";
+			obj.style.top = 35;
+			obj.style.left = screen.width;
+			obj.style.height = screen.height - 120;
+			
+			ScrObj = obj;
+			ScrAnimation();
 		} else {
 			obj.style.display = "none";
 		}
@@ -79,8 +103,7 @@ function ScreenShow(pos) {
 }
 </script>
 <style type="text/css">
-li {
-	text-align: left;
+.menu li {
 	vertical-align: middle;
 	margin: 2px;
 	padding: 10px;
@@ -89,7 +112,7 @@ li {
 	border: 2px solid #FF0000;
 	font-size: 16px;
 }
-ul {
+.menu ul {
 	list-style-type: none;
 	vertical-align: middle;
 	margin: 2px;
@@ -97,6 +120,9 @@ ul {
 	height: 20px;
 	background-color: #BBAABB;
 	border: 2px solid #FF0000;
+}
+li {
+	text-align: left;
 }
 .center {
 	text-align: center;
@@ -119,11 +145,16 @@ ul {
 	
 }
 .m {
-	position: absolute;
+	position: fixed;
 	bottom: 3px;
 	height: 80px;
 	width: 18%;
 	float: left;
+	display: table;
+}
+.m span {
+	display: table-cell;
+	vertical-align: middle;
 }
 .m0 {
 	left: 1%;
@@ -142,6 +173,9 @@ ul {
 }
 img {
 	vertical-align: -webkit-baseline-middle;
+}
+iframe {
+	border: 0;
 }
 </style>
 </head>
@@ -191,7 +225,7 @@ img {
 		</div>
 
 		<div id="menu4" class="menu" style="display: none;">
-			펜션 소식
+			리조트 소식
 			<ul>
 				<li onclick="ScreenShow(9);">리조트 소식</li>
 				<li onclick="ScreenShow(10);">이용 후기</li>
@@ -205,65 +239,139 @@ img {
 			<img src="../image/main1.jpg" style="width: 100%; height: auto;" />
 			<p>파이리조트로 놀러오셔요</p>
 		</div>
-		<div id="s1" class="s" style="background-color: #5F5F5F; display: none;">
+		<div id="s1" class="s" style="display: none;">
 			<p>금수저룸</p>
 			<img src="../image/gold1.jpg" style="width: 100%; height: auto;" />
-			<p>파이리조트로 놀러오셔요</p>
+			<p>럭셔리 휴식공간</p>
 		</div>
-		<div id="s2" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴0_3에 대한 화면
+		<div id="s2" class="s" style="display: none;">
+			<p>은수저룸</p>
+			<img src="../image/silver1.jpg" style="width: 100%; height: auto;" />
+			<p>아늑한 휴식공간</p>
 		</div>
-		<div id="s3" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴1_1에 대한 화면
+		<div id="s3" class="s" style="display: none;">
+			<p>흙수저룸</p>
+			<img src="../image/bronze1.jpg" style="width: 100%; height: auto;" />
+			<p>경제적 휴식공간</p>
 		</div>
-		<div id="s4" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴1_2에 대한 화면
+		<div id="s4" class="s" style="display: none; overflow: hidden;">
+			<p>자가용 이용</p>
+			<div
+				style="font: 12px AppleSDGothicNeo-Regular, dotum, sans-serif; letter-spacing: -1px; width: 100%; color: rgb(51, 51, 51); position: relative;">
+				<div style="height: 240px;">
+					<a
+						href="https://map.kakao.com/?urlX=853197&amp;urlY=1303110&amp;itemId=27392264&amp;q=%EB%A1%AF%EB%8D%B0%EB%A6%AC%EC%A1%B0%ED%8A%B8%EC%86%8D%EC%B4%88&amp;srcid=27392264&amp;map_type=TYPE_MAP&amp;from=roughmap"
+						target="_blank"><img class="map"
+						src="//t1.daumcdn.net/roughmap/imgmap/ccdcae9eaa18b0a949a89c969c76a94656ae03741e77800b3b8ad3a3a02052df"
+						width="100%" height="238"
+						style="border: 1px solid rgb(204, 204, 204);"></a>
+				</div>
+			</div>
+			<h5>주소 : 강원도 속초시 대포항길 186</h5>
+			<h5>출발지 : 서울</h5>
+			<ol>
+				<li>올림픽대로</li>
+				<li>강일IC</li>
+				<li>서울춘천고속도로</li>
+				<li>춘천JC</li>
+				<li>동홍천양양고속도로</li>
+				<li>양양JC</li>
+				<li>동해고속도로</li>
+			</ol>
+			<div style="height: 80px;"></div>
 		</div>
-		<div id="s5" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴1_3에 대한 화면
+		<div id="s5" class="s" style="display: none; overflow: hidden;">
+			<p>버스 이용</p>
+			<div
+				style="font: 12px AppleSDGothicNeo-Regular, dotum, sans-serif; letter-spacing: -1px; width: 100%; color: rgb(51, 51, 51); position: relative;">
+				<div style="height: 240px;">
+					<a
+						href="https://map.kakao.com/?urlX=853197&amp;urlY=1303110&amp;itemId=27392264&amp;q=%EB%A1%AF%EB%8D%B0%EB%A6%AC%EC%A1%B0%ED%8A%B8%EC%86%8D%EC%B4%88&amp;srcid=27392264&amp;map_type=TYPE_MAP&amp;from=roughmap"
+						target="_blank"><img class="map"
+						src="//t1.daumcdn.net/roughmap/imgmap/ccdcae9eaa18b0a949a89c969c76a94656ae03741e77800b3b8ad3a3a02052df"
+						width="100%" height="238"
+						style="border: 1px solid rgb(204, 204, 204);"></a>
+				</div>
+			</div>
+			<h5>주소 : 강원도 속초시 대포항길 186</h5>
+			<h5>출발지 : 서울</h5>
+			<ol>
+				<li>동서울터미널(1688-5979)</li>
+				<li>속초터미널</li>
+			</ol>
+			<ol>
+				<li>서울 고속버스터미널(1688-4700)</li>
+				<li>속초터미널</li>
+			</ol>
+			<div style="height: 80px;"></div>
 		</div>
-		<div id="s6" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴2_1에 대한 화면
+		<div id="s6" class="s" style="display: none; overflow: hidden;">
+			<p>설악</p>
+			<img src="http://www.thekmagazine.co.kr/file/webzine/11/wz_11_16_1_1529868633.jpg" style="width: 100%; height: auto;" />
+			<p>산이다.</p>
 		</div>
-		<div id="s7" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴2_2에 대한 화면
+		<div id="s7" class="s" style="display: none; overflow: hidden;">
+			<p>동해</p>
+			<img src="http://img.etoday.co.kr/pto_db/2017/06/20170630055356_1088133_710_340.jpg" style="width: 100%; height: auto;" />
+			<p>바다다.</p>
 		</div>
-		<div id="s8" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴2_3에 대한 화면
+		<div id="s8" class="s" style="display: none; overflow: hidden;">
+			<iframe src="/Resort/?contentPage=book/status.jsp" style="width: 100%; height: 98vh; margin-top: -130px;" onload="setIFrameHeight(this);"></iframe>
+			<script>
+				function setIFrameHeight(obj) {
+
+					if (obj.contentDocument) {
+
+						obj.height = obj.contentDocument.body.offsetHeight + 40;
+
+					} else {
+
+						obj.height = obj.contentWindow.document.body.scrollHeight;
+
+					}
+
+				}
+			</script>
+			<div style="height: 85px;"></div>
 		</div>
-		<div id="s9" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴3_1에 대한 화면
+		<div id="s9" class="s" style="display: none; overflow: hidden;">
+			<iframe src="/Resort/?contentPage=news/board/list.jsp" style="width: 100%; height: 98vh; margin-top: -130px;"></iframe>
+			<div style="height: 85px;"></div>
 		</div>
-		<div id="s10" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴3_2에 대한 화면
-		</div>
-		<div id="s11" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴3_3에 대한 화면
-		</div>
-		<div id="s12" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴4_1에 대한 화면
-		</div>
-		<div id="s13" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴4_2에 대한 화면
-		</div>
-		<div id="s14" class="s" style="background-color: #5F5F5F; display: none;">
-			나 메뉴4_3에 대한 화면
+		<div id="s10" class="s" style="display: none; overflow: hidden;">
+			<iframe src="/Resort/?contentPage=news/reboard/list.jsp" style="width: 100%; margin-top: -130px;" onload="setIFrameHeight(this);"></iframe>
+			<script>
+				function setIFrameHeight(obj) {
+
+					if (obj.contentDocument) {
+
+						obj.height = obj.contentDocument.body.offsetHeight + 40;
+
+					} else {
+
+						obj.height = obj.contentWindow.document.body.scrollHeight;
+
+					}
+
+				}
+			</script>
+			<div style="height: 85px;"></div>
 		</div>
 
 		<div id="m0" onclick="fncShow(0)" class="m m0" style="background-color: #FF0000;">
-			[메뉴0]
+			<span>리조트<br>소개</span>
 		</div>
 		<div id="m1" onclick="fncShow(1)" class="m m1" style="background-color: #FFFF00;">
-			[메뉴1]
+			<span>찾아<br>오기</span>
 		</div>
 		<div id="m2" onclick="fncShow(2)" class="m m2" style="background-color: #FFFF00;">
-			[메뉴2]
+			<span>주변<br>여행지</span>
 		</div>
 		<div id="m3" onclick="fncShow(3)" class="m m3" style="background-color: #FFFF00;">
-			[메뉴3]
+			<span>예약<br>하기</span>
 		</div>
 		<div id="m4" onclick="fncShow(4)" class="m m4" style="background-color: #FFFF00;">
-			[메뉴4]
+			<span>리조트<br>소식</span>
 		</div>
 	</div>
 </body>
