@@ -53,8 +53,28 @@ for(int i = 0; i < address.getLength(); i++) {
 <%
 	}
 %>
+<%
+	if(latitude.item(i).getFirstChild() != null) {
+%>
 			<td><%=latitude.item(i).getFirstChild().getNodeValue() %></td>
+<%
+	} else {
+%>
+			<td>위도가 없습니다.</td>
+<%
+	}
+%>
+<%
+	if(longitude.item(i).getFirstChild() != null) {
+%>
 			<td><%=longitude.item(i).getFirstChild().getNodeValue() %></td>
+<%
+	} else {
+%>
+			<td>경도가 없습니다.</td>
+<%
+	}
+%>
 		</tr>
 <%
 }
