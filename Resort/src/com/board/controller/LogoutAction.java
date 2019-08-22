@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LogoutAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
 		ActionForward forward = new ActionForward();

@@ -43,12 +43,16 @@ public class OneShotDaoImpl extends GenericDaoImpl<OneShot> implements OneShotDa
 		// TODO Auto-generated method stub
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 1);
-		String month = cal.get(Calendar.YEAR) + String.format("%02d", cal.get(Calendar.MONTH) + 1);
+		String month = cal.get(Calendar.YEAR) + 
+				String.format("%02d", cal.get(Calendar.MONTH) + 1);
 		String day = String.format("%02d", cal.get(Calendar.DATE));
 		String sql = String.format("SELECT cal.dt, DAYOFWEEK(cal.dt) AS 'dow', " + 
-				"IFNULL((SELECT `name` FROM book WHERE room = 1 AND resv_date = cal.dt), '예약 가능') AS 'room1', " + 
-				"IFNULL((SELECT `name` FROM book WHERE room = 2 AND resv_date = cal.dt), '예약 가능') AS 'room2', " + 
-				"IFNULL((SELECT `name` FROM book WHERE room = 3 AND resv_date = cal.dt), '예약 가능') AS 'room3' " + 
+				"IFNULL((SELECT `name` FROM book WHERE room = 1" + 
+				" AND resv_date = cal.dt), '예약 가능') AS 'room1', " + 
+				"IFNULL((SELECT `name` FROM book WHERE room = 2" + 
+				" AND resv_date = cal.dt), '예약 가능') AS 'room2', " + 
+				"IFNULL((SELECT `name` FROM book WHERE room = 3" + 
+				" AND resv_date = cal.dt), '예약 가능') AS 'room3' " + 
 				"FROM (" + 
 				"	SELECT dt + INTERVAL lv-1 DAY dt" + 
 				"	FROM (SELECT ordinal_position lv, CONCAT('%s', '%s') dt" + 

@@ -63,6 +63,14 @@ Element root = doc.getDocumentElement();
 Calendar cal = Calendar.getInstance();
 int dotw = cal.get(Calendar.DAY_OF_WEEK) - 1;
 String[] dotws = {"일", "월", "화", "수", "목", "금", "토"};
+int dotwnext = dotw + 1;
+if(dotwnext == 7) {
+	dotwnext = 0;
+}
+int dotwnext2 = dotw + 2;
+if(dotwnext2 == 7) {
+	dotwnext2 = 0;
+}
 
 //기상예보 시간
 NodeList header = root.getElementsByTagName("tm");
@@ -137,8 +145,8 @@ for(int i = 0; i < nl.getLength(); i++) {
 		<tr>
 			<th>날짜</th>
 			<td colspan="<%=today%>" class="center">오늘 (<%=days %>일 <%=dotws[dotw] %>)</td>
-			<td colspan="<%=tomorrow%>" class="center">내일 (<%=Integer.parseInt(days) + 1 %>일 <%=dotws[dotw + 1] %>)</td>
-			<td colspan="<%=dat%>" class="center">모레 (<%=Integer.parseInt(days) + 2 %>일 <%=dotws[dotw + 2] %>)</td>
+			<td colspan="<%=tomorrow%>" class="center">내일 (<%=Integer.parseInt(days) + 1 %>일 <%=dotws[dotwnext] %>)</td>
+			<td colspan="<%=dat%>" class="center">모레 (<%=Integer.parseInt(days) + 2 %>일 <%=dotws[dotwnext2] %>)</td>
 		</tr>
 		<tr>
 			<th>시각</th>
@@ -340,6 +348,8 @@ for(int i = 0; i < nl.getLength(); i++) {
 	elmt = (Element)nl.item(i);
 	
 	ws = elmt.getElementsByTagName("ws").item(0).getFirstChild().getNodeValue();
+	ws = ws.substring(0, ws.indexOf(".")) + "." + ws.substring(ws.indexOf(".") + 1, ws.indexOf(".") + 2);
+	
 %>
 			<td class="center"><%=ws %></td>
 <%

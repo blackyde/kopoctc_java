@@ -18,7 +18,9 @@ public class Connector {
 		
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://" + ADDRESS + "/" + DB_NAME, USERNAME, PASSWORD);
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://" + ADDRESS + "/" + 
+							DB_NAME, USERNAME, PASSWORD);
 		} catch (SQLException e) {
 			System.out.println("DB 연결 실패");
 		}

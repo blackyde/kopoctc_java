@@ -15,7 +15,8 @@ public class LoginAction implements Action {
 	
 	public static boolean check(String id, String password) {
 		
-		String sql = String.format("SELECT id FROM member WHERE PASSWORD('%s') = auth_string", password);
+		String sql = String.format("SELECT id FROM member"
+				+ " WHERE PASSWORD('%s') = auth_string", password);
 		
 		try {
 			Statement stmt = CONN.createStatement();
@@ -37,7 +38,8 @@ public class LoginAction implements Action {
 	}
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
